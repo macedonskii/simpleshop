@@ -32,7 +32,7 @@ public abstract class  BaseFragment extends Fragment implements View {
         try{
             activityCallback = (ActivityCallback) getActivity();
         }catch (ClassCastException e){
-            throw new ClassCastException(getActivity().getClass().getSimpleName() + " must implement " + ActivityCallback.class.getSimpleName());
+//            throw new ClassCastException(getActivity().getClass().getSimpleName() + " must implement " + ActivityCallback.class.getSimpleName());
         }
     }
 

@@ -3,6 +3,7 @@ package home.mad.simpleshop.presenter.adapters;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.util.Log;
 
 import java.util.List;
 
@@ -14,6 +15,7 @@ import home.mad.simpleshop.view.fragments.SearchTabFragment;
  */
 
 public class TabAdapter extends FragmentPagerAdapter {
+    final String TAG = getClass().getSimpleName();
 
     private List<Fragment> fragments;
     private List<String> names;
@@ -26,10 +28,11 @@ public class TabAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        if (fragments.size() < position){
+        Log.d(TAG, "getItem() called with: position = [" + position + "]");
+        if (fragments.size() > position){
             return fragments.get(position);
         }
-        return null;
+        throw new RuntimeException("Position > fragments count");
     }
 
     @Override
@@ -39,6 +42,7 @@ public class TabAdapter extends FragmentPagerAdapter {
 
     @Override
     public CharSequence getPageTitle(int position) {
-        return names.size() < position ? names.get(position) : null;
+        Log.d(TAG, "getPageTitle() called with: position = [" + position + "]");
+        return names.size() > position ? names.get(position) : null;
     }
 }

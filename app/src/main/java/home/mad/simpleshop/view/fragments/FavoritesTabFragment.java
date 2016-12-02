@@ -2,6 +2,7 @@ package home.mad.simpleshop.view.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +15,11 @@ import home.mad.simpleshop.view.FavoritesView;
  * Created by mad on 01.12.2016.
  */
 
-public class FavoritesTabFragment extends BaseFragment implements FavoritesView{
+public class FavoritesTabFragment
+        extends
+//        BaseFragment
+        Fragment
+        implements FavoritesView{
 
 
     @Nullable
@@ -24,8 +29,8 @@ public class FavoritesTabFragment extends BaseFragment implements FavoritesView{
         return view;
     }
 
-    @Override
-    protected Presenter getPresenter() {
-        return null;
-    }
+//    @Override
+//    protected Presenter getPresenter() {
+//        return null;
+//    }
 }
