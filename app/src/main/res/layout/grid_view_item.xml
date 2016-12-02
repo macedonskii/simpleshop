@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="1dp"
+    >
+
+    <ImageView
+        android:id="@+id/image"
+        android:layout_width="148dp"
+        android:layout_height="148dp"
+        android:scaleType="centerCrop"
+
+        />
+    <RelativeLayout
+        android:layout_width="148dp"
+        android:layout_height="@dimen/griid_view_single_line_footer_height"
+        android:layout_alignParentBottom="true"
+        android:background="@color/gridViewItemBackground"
+        >
+        <TextView
+            android:paddingLeft="@dimen/grid_view_single_line_padding_left"
+            android:layout_centerVertical="true"
+            android:textSize="@dimen/grid_view_single_line_text_size"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorWhite"
+            android:text="It is dog!"
+            />
+        <ImageButton
+            android:id="@+id/button"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@android:drawable/star_off"
+            android:background="@color/invisible"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            />
+
+    </RelativeLayout>
+
+
+
+</RelativeLayout>
