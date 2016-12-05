@@ -1,6 +1,7 @@
 package home.mad.simpleshop.presenter;
 
 import home.mad.simpleshop.model.Model;
+import home.mad.simpleshop.model.dto.ModelImpl;
 import rx.subscriptions.CompositeSubscription;
 
 /**
@@ -9,9 +10,11 @@ import rx.subscriptions.CompositeSubscription;
 
 public abstract class BasePresenter implements Presenter {
 
+    protected String TAG = getClass().getSimpleName();
 //    @Inject
-    protected Model model;
-    private CompositeSubscription compositeSubscription;
+//    protected Model model;
+    protected Model model = new ModelImpl();
+    protected CompositeSubscription compositeSubscription = new CompositeSubscription();
 
     public BasePresenter(){
 

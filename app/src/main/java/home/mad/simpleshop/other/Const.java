@@ -1,0 +1,17 @@
+package home.mad.simpleshop.other;
+
+/**
+ * Created by mad on 05.12.2016.
+ */
+
+public class Const {
+    public static String API_KEY = "api_key";
+    public static String API_KEY_VALUE = "l6pdqjuf7hdf97h1yvzadfce";
+    public static String CATEGORY = "category";
+    public static String KEYWORDS = "keywords";
+    public static String INCLUDES = "includes";
+    public static String IMAGES = "MainImage";
+
+
+
+}

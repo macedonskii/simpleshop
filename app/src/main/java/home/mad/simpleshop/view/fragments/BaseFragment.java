@@ -14,6 +14,7 @@ import home.mad.simpleshop.view.View;
 
 public abstract class  BaseFragment extends Fragment implements View {
 
+    protected String TAG = getClass().getSimpleName();
     protected ActivityCallback activityCallback;
 
     protected abstract Presenter getPresenter();

@@ -1,8 +1,13 @@
 package home.mad.simpleshop.view;
 
-/**
- * Created by mad on 01.12.2016.
- */
+import java.util.List;
 
-public interface SearchView {
+import home.mad.simpleshop.model.dto.ItemsDTO;
+
+public interface SearchView extends View {
+
+    void showEmptyList();
+
+    void showListItems(List<ItemsDTO> items);
+
 }
