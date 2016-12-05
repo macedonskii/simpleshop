@@ -19,6 +19,7 @@ public class SearchPresenter extends BasePresenter {
 
     SearchView view;
     public SearchPresenter(SearchView view) {
+        super();
         this.view = view;
     }
 

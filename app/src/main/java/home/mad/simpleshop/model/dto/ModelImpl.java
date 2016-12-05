@@ -6,9 +6,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import home.mad.simpleshop.model.Model;
 import home.mad.simpleshop.model.api.ApiInterface;
 import home.mad.simpleshop.model.api.ApiModule;
+import home.mad.simpleshop.other.App;
 import home.mad.simpleshop.other.Const;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
@@ -19,8 +22,12 @@ import rx.schedulers.Schedulers;
  */
 
 public class ModelImpl implements Model {
+    @Inject
+    ApiInterface api;
 
-    ApiInterface api = ApiModule.getApiInterface("https://openapi.etsy.com");
+    public ModelImpl(){
+        App.getGraph().inject(this);
+    }
 
     @Override
     public Observable<JsonObject> getCategories() {
