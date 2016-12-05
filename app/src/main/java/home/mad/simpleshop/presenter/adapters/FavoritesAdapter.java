@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
@@ -14,7 +13,7 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import home.mad.simpleshop.R;
-import home.mad.simpleshop.model.dto.ItemsDTO;
+import home.mad.simpleshop.model.dto.ItemDTO;
 
 /**
  * Created by mad on 02.12.2016.
@@ -22,11 +21,11 @@ import home.mad.simpleshop.model.dto.ItemsDTO;
 
 public class FavoritesAdapter extends BaseAdapter {
 
-    List<ItemsDTO> items;
+    List<ItemDTO> items;
     LayoutInflater layoutInflater;
     Context context;
 
-    public FavoritesAdapter(List<ItemsDTO> items, Context context){
+    public FavoritesAdapter(List<ItemDTO> items, Context context){
         this.items = items;
         layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.context = context;
@@ -63,8 +62,8 @@ public class FavoritesAdapter extends BaseAdapter {
         return view;
     }
 
-    private void setValues(ViewHolder holder, ItemsDTO item) {
-        holder.imageView.setImageResource(R.drawable.sample_0);
+    private void setValues(ViewHolder holder, ItemDTO item) {
+//        holder.imageView.setImageResource(R.drawable.sample_0);
     }
 
     class ViewHolder{

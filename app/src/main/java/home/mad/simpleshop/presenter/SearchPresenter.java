@@ -4,6 +4,10 @@ import android.util.Log;
 
 import com.google.gson.JsonObject;
 
+import java.util.List;
+
+import home.mad.simpleshop.model.dto.ItemDTO;
+import home.mad.simpleshop.model.mapers.JsonMaper;
 import home.mad.simpleshop.view.SearchView;
 import home.mad.simpleshop.view.fragments.SearchTabFragment;
 import rx.Observable;
@@ -28,20 +32,25 @@ public class SearchPresenter extends BasePresenter {
     }
 
     public void onClickSearch(String category, String keywords){
-        Subscription subscribe = model.getGoods(category, keywords).subscribe(new Observer<JsonObject>() {
+        Subscription subscribe = model.getGoods(category, keywords).
+                map(new JsonMaper()).subscribe(new Observer<List<ItemDTO>>() {
             @Override
             public void onCompleted() {
-                Log.d(TAG, "onCompleted: ");
+
             }
 
             @Override
             public void onError(Throwable e) {
-                Log.d(TAG, "onError: " + e);
+
             }
 
             @Override
-            public void onNext(JsonObject jsonObject) {
-                Log.d(TAG, "onNext() called with: jsonObject = [" + jsonObject + "]");
+            public void onNext(List<ItemDTO> items) {
+                if (items.size() == 0){
+                    view.showEmptyList();
+                }else{
+                    view.showListItems(items);
+                }
             }
         });
         compositeSubscription.add(subscribe);

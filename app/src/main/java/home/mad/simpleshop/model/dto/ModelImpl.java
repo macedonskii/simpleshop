@@ -10,7 +10,6 @@ import javax.inject.Inject;
 
 import home.mad.simpleshop.model.Model;
 import home.mad.simpleshop.model.api.ApiInterface;
-import home.mad.simpleshop.model.api.ApiModule;
 import home.mad.simpleshop.other.App;
 import home.mad.simpleshop.other.Const;
 import rx.Observable;
@@ -35,7 +34,7 @@ public class ModelImpl implements Model {
     }
 
     @Override
-    public List<ItemsDTO> getFavorites() {
+    public List<ItemDTO> getFavorites() {
         return new ArrayList<>();
     }
 

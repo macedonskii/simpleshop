@@ -4,7 +4,7 @@ import com.google.gson.JsonObject;
 
 import java.util.List;
 
-import home.mad.simpleshop.model.dto.ItemsDTO;
+import home.mad.simpleshop.model.dto.ItemDTO;
 import rx.Observable;
 
 /**
@@ -13,7 +13,7 @@ import rx.Observable;
 
 public interface Model {
 
-    List<ItemsDTO> getFavorites();
+    List<ItemDTO> getFavorites();
 
     Observable<JsonObject> getCategories();
 

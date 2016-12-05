@@ -11,8 +11,7 @@ import android.widget.GridView;
 import java.util.ArrayList;
 
 import home.mad.simpleshop.R;
-import home.mad.simpleshop.model.dto.ItemsDTO;
-import home.mad.simpleshop.presenter.Presenter;
+import home.mad.simpleshop.model.dto.ItemDTO;
 import home.mad.simpleshop.presenter.adapters.FavoritesAdapter;
 import home.mad.simpleshop.view.FavoritesView;
 
@@ -29,10 +28,10 @@ public class FavoritesTabFragment extends Fragment implements FavoritesView{
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_tab_favorites, container, false);
         gridView = (GridView) view.findViewById(R.id.grid);
-        ArrayList<ItemsDTO> items = new ArrayList<>();
-        for (int i = 0; i < 100; i++){
-            items.add(new ItemsDTO());
-        }
+        ArrayList<ItemDTO> items = new ArrayList<>();
+//        for (int i = 0; i < 100; i++){
+//            items.add(new ItemDTO());
+//        }
         gridView.setAdapter(new FavoritesAdapter(items, getContext()));
         return view;
     }

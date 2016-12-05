@@ -2,8 +2,6 @@ package home.mad.simpleshop.view.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +17,7 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import home.mad.simpleshop.R;
-import home.mad.simpleshop.model.dto.ItemsDTO;
+import home.mad.simpleshop.model.dto.ItemDTO;
 import home.mad.simpleshop.presenter.Presenter;
 import home.mad.simpleshop.presenter.SearchPresenter;
 import home.mad.simpleshop.view.SearchView;
@@ -32,14 +30,10 @@ import home.mad.simpleshop.view.SearchView;
 public class SearchTabFragment extends BaseFragment implements SearchView {
     @Bind(R.id.submit)
     Button submit;
-
     @Bind(R.id.spinner)
     Spinner spinner;
-
     @Bind(R.id.item_name)
     EditText keywords;
-
-
 
     SearchPresenter presenter;
 
@@ -71,14 +65,12 @@ public class SearchTabFragment extends BaseFragment implements SearchView {
 
     @Override
     public void showEmptyList() {
-        Toast.makeText(getContext(), "List items empty!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), "Item list is empty!", Toast.LENGTH_SHORT).show();
     }
 
     @Override
-    public void showListItems(List<ItemsDTO> items) {
-        for (ItemsDTO item : items) {
-            Log.d(TAG, "showListItems: " + item);
-        }
+    public void showListItems(List<ItemDTO> items) {
+        activityCallback.showFragment(SearchResultFragment.getInstance().setItems(items));
     }
 
 }
