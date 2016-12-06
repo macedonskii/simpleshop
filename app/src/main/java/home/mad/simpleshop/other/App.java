@@ -3,6 +3,7 @@ package home.mad.simpleshop.other;
 import android.app.Application;
 
 import home.mad.simpleshop.other.di.AppComponent;
+import home.mad.simpleshop.other.di.ContextModule;
 import home.mad.simpleshop.other.di.DaggerAppComponent;
 
 /**
@@ -21,6 +22,7 @@ public class App extends Application{
     public void onCreate() {
         super.onCreate();
         graph = DaggerAppComponent.builder()
+                .contextModule(new ContextModule(getApplicationContext()))
                 .build();
     }
 }

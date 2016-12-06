@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
@@ -25,7 +26,7 @@ public class FavoritesAdapter extends BaseAdapter {
     LayoutInflater layoutInflater;
     Context context;
 
-    public FavoritesAdapter(List<ItemDTO> items, Context context){
+    public FavoritesAdapter(List<ItemDTO> items, Context context) {
         this.items = items;
         layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.context = context;
@@ -49,15 +50,15 @@ public class FavoritesAdapter extends BaseAdapter {
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         ViewHolder holder;
-        if (view == null){
-            view = layoutInflater.inflate(R.layout.grid_view_item,viewGroup,false);
+        if (view == null) {
+            view = layoutInflater.inflate(R.layout.grid_view_item, viewGroup, false);
             holder = new ViewHolder(view);
             view.setTag(holder);
-        }else{
+        } else {
             holder = (ViewHolder) view.getTag();
         }
 
-        setValues(holder,items.get(i));
+        setValues(holder, items.get(i));
 
         return view;
     }
@@ -66,14 +67,14 @@ public class FavoritesAdapter extends BaseAdapter {
 //        holder.imageView.setImageResource(R.drawable.sample_0);
     }
 
-    class ViewHolder{
+    class ViewHolder {
         @Bind(R.id.button)
-        ImageButton button;
+        CheckBox button;
 
         @Bind(R.id.image)
         ImageView imageView;
 
-        public ViewHolder(View view){
+        public ViewHolder(View view) {
             ButterKnife.bind(this, view);
         }
     }

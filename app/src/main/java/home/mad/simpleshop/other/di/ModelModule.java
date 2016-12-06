@@ -1,11 +1,15 @@
 package home.mad.simpleshop.other.di;
 
+import android.content.Context;
+
 import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
 import home.mad.simpleshop.model.api.ApiInterface;
 import home.mad.simpleshop.model.api.ApiModule;
+import home.mad.simpleshop.model.sqlite.Database;
+import home.mad.simpleshop.model.sqlite.DatabaseImpl;
 import home.mad.simpleshop.other.Const;
 
 /**
@@ -16,5 +20,15 @@ public class ModelModule {
 
     @Provides
     @Singleton
-    ApiInterface getApiInterface(){return ApiModule.getApiInterface(Const.BASE_URL);}
+    ApiInterface getApiInterface() {
+        return ApiModule.getApiInterface(Const.BASE_URL);
+    }
+
+    @Provides
+    @Singleton
+    Database getDatabase(Context context) {
+        return new DatabaseImpl(context);
+    }
+
+
 }

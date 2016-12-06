@@ -10,6 +10,7 @@ import javax.inject.Inject;
 
 import home.mad.simpleshop.model.Model;
 import home.mad.simpleshop.model.api.ApiInterface;
+import home.mad.simpleshop.model.sqlite.Database;
 import home.mad.simpleshop.other.App;
 import home.mad.simpleshop.other.Const;
 import rx.Observable;
@@ -24,6 +25,9 @@ public class ModelImpl implements Model {
     @Inject
     ApiInterface api;
 
+    @Inject
+    Database database;
+
     public ModelImpl(){
         App.getGraph().inject(this);
     }
@@ -34,8 +38,8 @@ public class ModelImpl implements Model {
     }
 
     @Override
-    public List<ItemDTO> getFavorites() {
-        return new ArrayList<>();
+    public Observable<List<ItemDTO>> getFavorites() {
+        return database.getFavorites(null).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
     }
 
     //    https://openapi.etsy.com/v2/listings/active?api_key=l6pdqjuf7hdf97h1yvzadfce&category=paper_goods&keywords=terminator&includes=MainImage
@@ -46,5 +50,20 @@ public class ModelImpl implements Model {
         values.put(Const.KEYWORDS, (itemName != null && itemName.length() != 0) ? itemName : "terminator");
         values.put(Const.INCLUDES, Const.IMAGES);
         return api.getItems(values).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+    }
+
+    @Override
+    public void addFavorite(ItemDTO item) {
+        database.addFavorite(item);
+    }
+
+    @Override
+    public Observable<List<ItemDTO>> getFavorites(String category) {
+        return database.getFavorites(category).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+    }
+
+    @Override
+    public void removeFavorite(long id) {
+        database.removeFavorite(id);
     }
 }

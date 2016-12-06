@@ -9,35 +9,60 @@ import android.view.ViewGroup;
 import android.widget.GridView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import home.mad.simpleshop.R;
 import home.mad.simpleshop.model.dto.ItemDTO;
+import home.mad.simpleshop.presenter.FavoritesPresenter;
+import home.mad.simpleshop.presenter.Presenter;
 import home.mad.simpleshop.presenter.adapters.FavoritesAdapter;
+import home.mad.simpleshop.presenter.adapters.SearchResultAdapter;
 import home.mad.simpleshop.view.FavoritesView;
 
 /**
  * Created by mad on 01.12.2016.
  */
 
-public class FavoritesTabFragment extends Fragment implements FavoritesView{
+public class FavoritesTabFragment extends BaseFragment implements FavoritesView {
 
 
     GridView gridView;
+    private FavoritesPresenter presenter;
+    SearchResultAdapter adapter;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_tab_favorites, container, false);
         gridView = (GridView) view.findViewById(R.id.grid);
-        ArrayList<ItemDTO> items = new ArrayList<>();
-//        for (int i = 0; i < 100; i++){
-//            items.add(new ItemDTO());
-//        }
-        gridView.setAdapter(new FavoritesAdapter(items, getContext()));
+        if (presenter == null) {
+            presenter = new FavoritesPresenter(this);
+        } else {
+            presenter.setView(this);
+        }
+        if (adapter == null) adapter = new SearchResultAdapter(getContext(), new ArrayList<>(), presenter);
+        gridView.setAdapter(adapter);
         return view;
     }
 
-//    @Override
-//    protected Presenter getPresenter() {
-//        return null;
-//    }
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        presenter.onViewCreated();
+    }
+
+    @Override
+    protected Presenter getPresenter() {
+        return presenter;
+    }
+
+    @Override
+    public void showEmptyList() {
+
+    }
+
+    @Override
+    public void showFavoritesList(List<ItemDTO> items) {
+        adapter.setList(items);
+    }
 }

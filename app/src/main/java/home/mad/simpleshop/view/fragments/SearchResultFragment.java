@@ -39,18 +39,23 @@ public class SearchResultFragment extends BaseFragment implements SearchResultVi
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_search, container, false);
-        ButterKnife.bind(this,view);
-        gridView.setAdapter(new SearchResultAdapter(getContext(), items));
-        if (presenter != null) presenter = new SearchResultPresenter(this);
+        ButterKnife.bind(this, view);
+        if (presenter == null) {
+            presenter = new SearchResultPresenter(this);
+        }else{
+            presenter.setView(this);
+        }
+        gridView.setAdapter(new SearchResultAdapter(getContext(), items, presenter));
         return view;
     }
 
-    public static SearchResultFragment getInstance(){
+    public static SearchResultFragment getInstance() {
         return new SearchResultFragment();
     }
 
-    public SearchResultFragment setItems(List<ItemDTO> items){
+    public SearchResultFragment setItems(List<ItemDTO> items) {
         this.items = items;
         return this;
     }
+
 }

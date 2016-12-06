@@ -10,7 +10,7 @@ import home.mad.simpleshop.presenter.BasePresenter;
  * Created by mad on 05.12.2016.
  */
 @Singleton
-@Component(modules = {PresenterModule.class, ModelModule.class})
+@Component(modules = {PresenterModule.class, ModelModule.class, ContextModule.class})
 public interface AppComponent {
 
     void inject(BasePresenter presenter);

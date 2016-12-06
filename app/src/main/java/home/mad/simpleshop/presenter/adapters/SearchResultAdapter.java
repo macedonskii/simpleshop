@@ -1,17 +1,21 @@
 package home.mad.simpleshop.presenter.adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageButton;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -26,10 +30,15 @@ public class SearchResultAdapter extends BaseAdapter {
     private Context context;
     private List<ItemDTO> items;
     private LayoutInflater inflater;
+    private ItemClick itemClick;
+    private Map<Integer, ItemDTO> assotiation = new HashMap<>();
 
-    public SearchResultAdapter(Context context, List<ItemDTO> items) {
+
+
+    public SearchResultAdapter(Context context, List<ItemDTO> items, ItemClick clickListener) {
         this.context = context;
         this.items = items;
+        this.itemClick = clickListener;
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
@@ -65,13 +74,24 @@ public class SearchResultAdapter extends BaseAdapter {
     private void setValues(Holder holder, ItemDTO item) {
         holder.title.setText(item.getTitle());
         Picasso.with(context).load(item.getImageMedium()).into(holder.image);
+        assotiation.put(holder.button.getId(),item);
+        holder.button.setOnCheckedChangeListener((CompoundButton compoundButton, boolean b) -> {
+            Log.d(getClass().getSimpleName(), "setValues() called with: item = " + item);
+            itemClick.onFavoritesClick(assotiation.get(compoundButton.getId()),b);
+        });
 
+
+    }
+
+    public void setList(List<ItemDTO> items) {
+        this.items = items;
+        notifyDataSetChanged();
     }
 
     protected class Holder {
 
         @Bind(R.id.button)
-        ImageButton button;
+        CheckBox button;
         @Bind(R.id.title)
         TextView title;
         @Bind(R.id.image)
@@ -80,5 +100,10 @@ public class SearchResultAdapter extends BaseAdapter {
         public Holder(View view) {
             ButterKnife.bind(this,view);
         }
+    }
+
+    public interface ItemClick{
+        void onItemClick(ItemDTO item);
+        void onFavoritesClick(ItemDTO item, boolean checked);
     }
 }

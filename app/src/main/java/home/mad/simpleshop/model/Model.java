@@ -13,10 +13,16 @@ import rx.Observable;
 
 public interface Model {
 
-    List<ItemDTO> getFavorites();
+    Observable<List<ItemDTO>> getFavorites();
+
+    Observable<List<ItemDTO>> getFavorites(String category);
 
     Observable<JsonObject> getCategories();
 
     Observable<JsonObject> getGoods(String category, String itemName);
+
+    void addFavorite(ItemDTO item);
+
+    void removeFavorite(long id);
 
 }
