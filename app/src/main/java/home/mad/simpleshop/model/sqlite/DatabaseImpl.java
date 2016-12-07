@@ -57,7 +57,7 @@ public class DatabaseImpl extends SQLiteOpenHelper implements Database {
     public void addFavorite(ItemDTO item) {
         try {
 //            getReadableDatabase().execSQL("INSERT INTO " + TABLE_FAVORITES_NAME + " VALUES (" + getDataFromItem(item) + ");");
-            getReadableDatabase().execSQL(String.format("INSERT INTO %1s (%2s, %3s, %4s, %5s, %6s, %7s, %8s, %9s, %10s) VALUES (%11s);",
+            getWritableDatabase().execSQL(String.format("INSERT INTO %1s (%2s, %3s, %4s, %5s, %6s, %7s, %8s, %9s, %10s) VALUES (%11s);",
                     TABLE_FAVORITES_NAME,
                     KEY_LISTING_ID,
                     KEY_TITLE,
@@ -77,7 +77,7 @@ public class DatabaseImpl extends SQLiteOpenHelper implements Database {
     @Override
     public void removeFavorite(long id) {
         try {
-            getReadableDatabase().execSQL(String.format("DELETE FROM %1s WHERE %2s = %3d;", TABLE_FAVORITES_NAME, KEY_LISTING_ID, id));
+            getWritableDatabase().execSQL(String.format("DELETE FROM %1s WHERE %2s = %3d;", TABLE_FAVORITES_NAME, KEY_LISTING_ID, id));
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -86,8 +86,8 @@ public class DatabaseImpl extends SQLiteOpenHelper implements Database {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        sqLiteDatabase.execSQL("create table " + TABLE_FAVORITES_NAME + " ("
-                + KEY_ID + " integer primary key autoincrement, "
+        sqLiteDatabase.execSQL("CREATE TABLE " + TABLE_FAVORITES_NAME + " ("
+                + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + KEY_LISTING_ID + " INTEGER, "
                 + KEY_TITLE + " TEXT, "
                 + KEY_ITEM_DESCRIPTION + " TEXT, "
@@ -108,7 +108,7 @@ public class DatabaseImpl extends SQLiteOpenHelper implements Database {
 
     private String getDataFromItem(ItemDTO item) {
 
-        return String.format("%1d, '%2s', '%3s', %4f, '%5s', '%6s', '%7s', '%8s', '%9s'",
+        return String.format("%1d, '%2s', '%3s', '%4f', '%5s', '%6s', '%7s', '%8s', '%9s'",
                 item.getListingId(), item.getTitle(), item.getDescription(), item.getPrice()
                 , item.getPriceDescription(), item.getCategory(), item.getImageMedium(), item.getImageBig(), item.getImageFull());
     }
@@ -124,6 +124,21 @@ public class DatabaseImpl extends SQLiteOpenHelper implements Database {
         item.setImageMedium(cursor.getString(7));
         item.setImageBig(cursor.getString(8));
         item.setImageFull(cursor.getString(9));
+        item.setFavorites(true);
         return item;
     }
+
+/*
+*
+INSERT INTO favorites (listing_id, title, description, price, price_description, category, image_medium, image_large, image_full) VALUES (236567158, 'Sweat Like A Pig To Look Like A Fox Personal Best T-Shirt - Funny Slogan tshirt tee gift running exercise healthy training trainers fit 123t', 'An inspirational Personal Best® original design that motivates anyone sweating their way to a hot body to keep on sweating like a pig to look like a fox. Makes an ideal gift for running, fitness, training, and gym obsessed friends and family members.
+Whether for Dad or Uncle, your partner or even your friends, our &quot;Sweat Like A Pig To Look Like A Fox&quot; design from our Personal Best range is sure to put a smile on their face. After all, we all know someone who this slogan would apply to!
+UK sizes in inches (Chest to fit) S - 36&quot;, M - 40&quot;, L - 44&quot;, XL - 48&quot;, 2XL* - 52&quot;, 3XL* - 56&quot;, 4XL - 60&quot;, 5XL - 64&quot;
+S - 2XL All colours available
+3XL - 5XL Available in Black, Navy, Red and Royal Blue
+This design is also available in Sweatshirts, Hoodies and even mugs!
+** Please contact us if you would like this in Kids&#39; Sizes **
+This is a professionally produced screen-printed product and make wonderful gifts for every occasion.
+Although cheaper items may be available elsewhere, the quality of our garments and production techniques are unparalleled. So while the price may be a little more expensive, we&#39;re adamant our assurance of quality is worth spending that little bit extra. We operate a 100% CUSTOMER SATISFACTION POLICY', 7,970000, '  GBP', 'category', 'https://img0.etsystatic.com/066/0/11007521/il_170x135.785238970_abce.jpg', 'https://img0.etsystatic.com/066/0/11007521/il_570xN.785238970_abce.jpg', 'https://img0.etsystatic.com/066/0/11007521/il_fullxfull.785238970_abce.jpg');
+*/
+
 }

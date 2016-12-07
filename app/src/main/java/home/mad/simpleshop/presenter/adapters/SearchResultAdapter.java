@@ -27,6 +27,8 @@ import home.mad.simpleshop.model.dto.ItemDTO;
  */
 
 public class SearchResultAdapter extends BaseAdapter {
+
+    private final String TAG = getClass().getSimpleName();
     private Context context;
     private List<ItemDTO> items;
     private LayoutInflater inflater;
@@ -72,12 +74,16 @@ public class SearchResultAdapter extends BaseAdapter {
     }
 
     private void setValues(Holder holder, ItemDTO item) {
+
+        assotiation.put(holder.checkBox.hashCode(),item);
+        Log.d(TAG, "setValues: association = " + assotiation);
+
         holder.title.setText(item.getTitle());
         Picasso.with(context).load(item.getImageMedium()).into(holder.image);
-        assotiation.put(holder.button.getId(),item);
-        holder.button.setOnCheckedChangeListener((CompoundButton compoundButton, boolean b) -> {
+        holder.checkBox.setChecked(item.isFavorites());
+        holder.checkBox.setOnCheckedChangeListener((CompoundButton compoundButton, boolean b) -> {
             Log.d(getClass().getSimpleName(), "setValues() called with: item = " + item);
-            itemClick.onFavoritesClick(assotiation.get(compoundButton.getId()),b);
+            itemClick.onFavoritesClick(assotiation.get(compoundButton.hashCode()),b);
         });
 
 
@@ -91,7 +97,7 @@ public class SearchResultAdapter extends BaseAdapter {
     protected class Holder {
 
         @Bind(R.id.button)
-        CheckBox button;
+        CheckBox checkBox;
         @Bind(R.id.title)
         TextView title;
         @Bind(R.id.image)

@@ -18,6 +18,7 @@ public class SearchResultPresenter extends BasePresenter implements SearchResult
 
     @Override
     public void onFavoritesClick(ItemDTO item, boolean checked) {
+        item.setFavorites(checked);
         if (checked) {
             model.addFavorite(item);
         } else {

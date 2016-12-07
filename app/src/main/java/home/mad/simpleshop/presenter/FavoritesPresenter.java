@@ -21,7 +21,12 @@ public class FavoritesPresenter extends BasePresenter implements SearchResultAda
 
     @Override
     public void onFavoritesClick(ItemDTO item, boolean checked) {
-
+        item.setFavorites(checked);
+        if (checked) {
+            model.addFavorite(item);
+        } else {
+            model.removeFavorite(item.getListingId());
+        }
     }
 
     @Override
