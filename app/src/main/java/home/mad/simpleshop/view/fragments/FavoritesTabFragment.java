@@ -2,7 +2,6 @@ package home.mad.simpleshop.view.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +14,6 @@ import home.mad.simpleshop.R;
 import home.mad.simpleshop.model.dto.ItemDTO;
 import home.mad.simpleshop.presenter.FavoritesPresenter;
 import home.mad.simpleshop.presenter.Presenter;
-import home.mad.simpleshop.presenter.adapters.FavoritesAdapter;
 import home.mad.simpleshop.presenter.adapters.SearchResultAdapter;
 import home.mad.simpleshop.view.FavoritesView;
 
@@ -59,6 +57,11 @@ public class FavoritesTabFragment extends BaseFragment implements FavoritesView 
     @Override
     public void showEmptyList() {
 
+    }
+
+    @Override
+    public void onItemClick(ItemDTO item) {
+        activityCallback.showFragment(FullItemFragment.getInstance().setItem(item));
     }
 
     @Override

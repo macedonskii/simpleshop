@@ -10,5 +10,5 @@ public interface View {
 
     void hideLoadingState();
 
-    void showError();
+    void showError(Exception exception);
 }

@@ -48,7 +48,7 @@ public abstract class  BaseFragment extends Fragment implements View {
     }
 
     @Override
-    public void showError() {
+    public void showError(Exception exception) {
         activityCallback.showError();
     }
 }

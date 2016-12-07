@@ -28,7 +28,7 @@ public class SearchResultPresenter extends BasePresenter implements SearchResult
 
     @Override
     public void onItemClick(ItemDTO item) {
-
+        view.onItemClick(item);
     }
 
     public void setView(SearchResultView view) {

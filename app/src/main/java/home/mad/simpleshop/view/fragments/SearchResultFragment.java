@@ -42,8 +42,6 @@ public class SearchResultFragment extends BaseFragment implements SearchResultVi
         ButterKnife.bind(this, view);
         if (presenter == null) {
             presenter = new SearchResultPresenter(this);
-        }else{
-            presenter.setView(this);
         }
         gridView.setAdapter(new SearchResultAdapter(getContext(), items, presenter));
         return view;
@@ -58,4 +56,8 @@ public class SearchResultFragment extends BaseFragment implements SearchResultVi
         return this;
     }
 
+    @Override
+    public void onItemClick(ItemDTO item) {
+        activityCallback.showFragment(FullItemFragment.getInstance().setItem(item));
+    }
 }

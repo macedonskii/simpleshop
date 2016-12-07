@@ -5,7 +5,6 @@ import java.util.List;
 import home.mad.simpleshop.model.dto.ItemDTO;
 import home.mad.simpleshop.presenter.adapters.SearchResultAdapter;
 import home.mad.simpleshop.view.FavoritesView;
-import home.mad.simpleshop.view.fragments.FavoritesTabFragment;
 import rx.Observer;
 import rx.Subscription;
 
@@ -31,7 +30,7 @@ public class FavoritesPresenter extends BasePresenter implements SearchResultAda
 
     @Override
     public void onItemClick(ItemDTO item) {
-
+        view.onItemClick(item);
     }
 
     public void setView(FavoritesView view) {
@@ -61,4 +60,6 @@ public class FavoritesPresenter extends BasePresenter implements SearchResultAda
         });
         compositeSubscription.add(subscribe);
     }
+
+
 }

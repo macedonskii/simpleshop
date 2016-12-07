@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    android:id="@+id/background"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -10,6 +12,8 @@
         android:layout_height="270dp"
         android:layout_width="340dp"
         android:scaleType="centerCrop"
+        android:focusable="false"
+        android:clickable="false"
 
         />
     <RelativeLayout
@@ -17,6 +21,8 @@
         android:layout_height="@dimen/griid_view_single_line_footer_height"
         android:layout_below="@+id/image"
         android:background="@color/gridViewItemBackground"
+        android:focusable="false"
+        android:clickable="false"
         >
         <TextView
             android:id="@+id/title"
@@ -26,8 +32,9 @@
             android:textSize="@dimen/grid_view_single_line_text_size"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
             android:text="It is dog!"
+            android:focusable="false"
+            android:clickable="false"
             />
         <CheckBox
             android:id="@+id/button"

@@ -9,6 +9,7 @@ import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
@@ -33,7 +34,8 @@ public class SearchResultAdapter extends BaseAdapter {
     private List<ItemDTO> items;
     private LayoutInflater inflater;
     private ItemClick itemClick;
-    private Map<Integer, ItemDTO> assotiation = new HashMap<>();
+    private Map<Integer, ItemDTO> buttonsAssoc = new HashMap<>();
+    private Map<Integer, ItemDTO> backgroundAssoc = new HashMap<>();
 
 
 
@@ -75,16 +77,20 @@ public class SearchResultAdapter extends BaseAdapter {
 
     private void setValues(Holder holder, ItemDTO item) {
 
-        assotiation.put(holder.checkBox.hashCode(),item);
-        Log.d(TAG, "setValues: association = " + assotiation);
-
+        buttonsAssoc.put(holder.checkBox.hashCode(),item);
+        backgroundAssoc.put(holder.background.hashCode(), item);
+//        Log.d(TAG, "setValues: association size = " + buttonsAssoc.keySet().size());
         holder.title.setText(item.getTitle());
         Picasso.with(context).load(item.getImageMedium()).into(holder.image);
         holder.checkBox.setChecked(item.isFavorites());
         holder.checkBox.setOnCheckedChangeListener((CompoundButton compoundButton, boolean b) -> {
-            Log.d(getClass().getSimpleName(), "setValues() called with: item = " + item);
-            itemClick.onFavoritesClick(assotiation.get(compoundButton.hashCode()),b);
+//            Log.d(getClass().getSimpleName(), "setValues() called with: item = " + item);
+            itemClick.onFavoritesClick(buttonsAssoc.get(compoundButton.hashCode()),b);
         });
+        holder.background.setOnClickListener((View v) -> {
+            itemClick.onItemClick(backgroundAssoc.get(v.hashCode()));
+        });
+
 
 
     }
@@ -102,6 +108,8 @@ public class SearchResultAdapter extends BaseAdapter {
         TextView title;
         @Bind(R.id.image)
         ImageView image;
+        @Bind(R.id.background)
+        RelativeLayout background;
 
         public Holder(View view) {
             ButterKnife.bind(this,view);

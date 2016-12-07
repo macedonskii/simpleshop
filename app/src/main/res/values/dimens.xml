@@ -10,4 +10,5 @@
     <dimen name="grid_view_single_line_padding_top">16dp</dimen>
     <dimen name="grid_view_single_line_padding_left">16dp</dimen>
     <dimen name="grid_view_single_line_text_size">16sp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
 </resources>

@@ -12,4 +12,6 @@ public interface FavoritesView {
     void showEmptyList();
 
     void showFavoritesList(List<ItemDTO> items);
+
+    void onItemClick(ItemDTO item);
 }

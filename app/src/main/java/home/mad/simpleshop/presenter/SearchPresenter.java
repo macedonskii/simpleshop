@@ -1,16 +1,11 @@
 package home.mad.simpleshop.presenter;
 
-import android.util.Log;
-
-import com.google.gson.JsonObject;
 
 import java.util.List;
 
 import home.mad.simpleshop.model.dto.ItemDTO;
 import home.mad.simpleshop.model.mapers.JsonMaper;
 import home.mad.simpleshop.view.SearchView;
-import home.mad.simpleshop.view.fragments.SearchTabFragment;
-import rx.Observable;
 import rx.Observer;
 import rx.Subscription;
 
@@ -41,7 +36,7 @@ public class SearchPresenter extends BasePresenter {
 
             @Override
             public void onError(Throwable e) {
-
+//                SearchPresenter.this.view.showError(e.);
             }
 
             @Override

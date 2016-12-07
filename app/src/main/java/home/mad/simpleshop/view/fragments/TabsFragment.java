@@ -60,7 +60,7 @@ public class TabsFragment extends BaseFragment implements TabsView {
         fragments.add(new FavoritesTabFragment());
         names.add("search");
         names.add("favorites");
-        TabAdapter adapter = new TabAdapter(getActivity().getSupportFragmentManager(), fragments, names);
+        TabAdapter adapter = new TabAdapter(getChildFragmentManager(), fragments, names);
         viewPager.setAdapter(adapter);
     }
 }
