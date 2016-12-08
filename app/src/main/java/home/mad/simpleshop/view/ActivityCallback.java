@@ -14,5 +14,5 @@ public interface ActivityCallback {
 
     void showProgressBar();
 
-    void showError();
+    void showError(Throwable throwable);
 }

@@ -40,7 +40,7 @@ public class SearchPresenter extends BasePresenter {
 
             @Override
             public void onError(Throwable e) {
-//                SearchPresenter.this.view.showError(e.);
+                view.showError(e);
             }
 
             @Override
@@ -65,7 +65,7 @@ public class SearchPresenter extends BasePresenter {
 
             @Override
             public void onError(Throwable e) {
-
+                view.showError(e);
             }
 
             @Override

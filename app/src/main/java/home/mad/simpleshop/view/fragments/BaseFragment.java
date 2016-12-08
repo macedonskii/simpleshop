@@ -3,6 +3,8 @@ package home.mad.simpleshop.view.fragments;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.ViewGroup;
 
 import home.mad.simpleshop.presenter.Presenter;
 import home.mad.simpleshop.view.ActivityCallback;
@@ -30,10 +32,17 @@ public abstract class  BaseFragment extends Fragment implements View {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRetainInstance(true);
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
         try{
             activityCallback = (ActivityCallback) getActivity();
         }catch (ClassCastException e){
-//            throw new ClassCastException(getActivity().getClass().getSimpleName() + " must implement " + ActivityCallback.class.getSimpleName());
+            throw new ClassCastException(getActivity().getClass().getSimpleName() + " must implement " + ActivityCallback.class.getSimpleName());
         }
     }
 
@@ -48,7 +57,7 @@ public abstract class  BaseFragment extends Fragment implements View {
     }
 
     @Override
-    public void showError(Exception exception) {
-        activityCallback.showError();
+    public void showError(Throwable throwable) {
+        activityCallback.showError(throwable);
     }
 }

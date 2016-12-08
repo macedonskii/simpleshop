@@ -26,6 +26,7 @@ public class SearchResultFragment extends BaseFragment implements SearchResultVi
 
     private List<ItemDTO> items;
     private SearchResultPresenter presenter;
+    private SearchResultAdapter adapter;
 
     @Bind(R.id.searchGridView)
     GridView gridView;
@@ -35,16 +36,29 @@ public class SearchResultFragment extends BaseFragment implements SearchResultVi
         return presenter;
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (savedInstanceState == null) {
+            presenter = new SearchResultPresenter(this);
+            adapter = new SearchResultAdapter(getContext(), items, presenter);
+        }
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_search, container, false);
         ButterKnife.bind(this, view);
-        if (presenter == null) {
-            presenter = new SearchResultPresenter(this);
-        }
-        gridView.setAdapter(new SearchResultAdapter(getContext(), items, presenter));
+
         return view;
+
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        gridView.setAdapter(adapter);
     }
 
     public static SearchResultFragment getInstance() {

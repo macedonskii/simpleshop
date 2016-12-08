@@ -1,20 +1,12 @@
 package home.mad.simpleshop;
 
-import android.content.Intent;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
+import android.widget.Toast;
 
-import java.util.ArrayList;
-
-import home.mad.simpleshop.presenter.adapters.TabAdapter;
 import home.mad.simpleshop.view.ActivityCallback;
-import home.mad.simpleshop.view.fragments.FavoritesTabFragment;
-import home.mad.simpleshop.view.fragments.SearchTabFragment;
 import home.mad.simpleshop.view.fragments.TabsFragment;
 
 public class MainActivity extends AppCompatActivity implements ActivityCallback{
@@ -27,7 +19,7 @@ public class MainActivity extends AppCompatActivity implements ActivityCallback{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         fragmentManager = getSupportFragmentManager();
-        if (savedInstanceState == null)fragmentManager.beginTransaction().replace(R.id.container,new TabsFragment()).addToBackStack(null).commit();
+        if (savedInstanceState == null)fragmentManager.beginTransaction().replace(R.id.container,new TabsFragment()).commit();
     }
 
 
@@ -47,7 +39,9 @@ public class MainActivity extends AppCompatActivity implements ActivityCallback{
     }
 
     @Override
-    public void showError() {
-
+    public void showError(Throwable throwable) {
+        throwable.printStackTrace();
+        Toast.makeText(this, throwable.getMessage(), Toast.LENGTH_SHORT).show();
     }
+
 }
