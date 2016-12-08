@@ -17,7 +17,7 @@ public interface ApiInterface {
     @GET("/v2/listings/active")
     Observable<JsonObject> getItems(@QueryMap Map<String, String> options);
 
-    @GET("/taxonomy/categories")
+    @GET("/v2/taxonomy/categories")
     Observable<JsonObject>  getCategories();
 
 

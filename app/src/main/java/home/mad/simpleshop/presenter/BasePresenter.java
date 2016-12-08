@@ -1,5 +1,7 @@
 package home.mad.simpleshop.presenter;
 
+import android.content.SharedPreferences;
+
 import javax.inject.Inject;
 
 import home.mad.simpleshop.model.Model;
@@ -16,6 +18,8 @@ public abstract class BasePresenter implements Presenter {
     protected String TAG = getClass().getSimpleName();
     @Inject
     protected Model model;
+    @Inject
+    protected SharedPreferences preferences;
 //    protected Model model = new ModelImpl();
     protected CompositeSubscription compositeSubscription = new CompositeSubscription();
 

@@ -1,6 +1,7 @@
 package home.mad.simpleshop.other.di;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 
 import javax.inject.Singleton;
 
@@ -29,6 +30,10 @@ public class ModelModule {
     Database getDatabase(Context context) {
         return new DatabaseImpl(context);
     }
+
+    @Provides
+    @Singleton
+    SharedPreferences getSharedPreferences(Context context){return context.getSharedPreferences(Const.SHARED_PREFERENCES, Context.MODE_PRIVATE);}
 
 
 }

@@ -19,10 +19,6 @@ import home.mad.simpleshop.presenter.TabsPresenter;
 import home.mad.simpleshop.presenter.adapters.TabAdapter;
 import home.mad.simpleshop.view.TabsView;
 
-/**
- * Created by mad on 05.12.2016.
- */
-
 public class TabsFragment extends BaseFragment implements TabsView {
 
     TabsPresenter presenter = new TabsPresenter(this);
@@ -45,7 +41,6 @@ public class TabsFragment extends BaseFragment implements TabsView {
         Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
         ((MainActivity)getActivity()).setSupportActionBar(toolbar);
         ((MainActivity)getActivity()).getSupportActionBar().setHomeButtonEnabled(true);
-
         viewPager = (ViewPager) view.findViewById(R.id.viewpager);
         setupViewPager();
         tabLayout = (TabLayout) view.findViewById(R.id.tabs);
