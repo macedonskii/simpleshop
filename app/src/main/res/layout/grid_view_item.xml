@@ -5,19 +5,20 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:padding="1dp">
+
+    >
 
     <ImageView
         android:id="@+id/image"
+        android:layout_width="@dimen/column_width_grid_view"
         android:layout_height="270dp"
-        android:layout_width="340dp"
         android:scaleType="centerCrop"
         android:focusable="false"
         android:clickable="false"
 
         />
     <RelativeLayout
-        android:layout_width="340dp"
+        android:layout_width="@dimen/column_width_grid_view"
         android:layout_height="@dimen/griid_view_single_line_footer_height"
         android:layout_below="@+id/image"
         android:background="@color/gridViewItemBackground"

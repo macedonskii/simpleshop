@@ -51,7 +51,7 @@ public class FullItemFragment extends BaseFragment implements FullItemView {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         if (item == null) throw new RuntimeException("Item to show == null");
-        Picasso.with(getContext()).load(item.getImageMedium()).into(image);
+        Picasso.with(getContext()).load(item.getImageBig()).into(image);
         description.setText(item.getDescription());
         title.setText(item.getTitle());
         price.setText(item.getPriceString());

@@ -50,7 +50,6 @@ public class SearchResultFragment extends BaseFragment implements SearchResultVi
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_search, container, false);
         ButterKnife.bind(this, view);
-
         return view;
 
     }
