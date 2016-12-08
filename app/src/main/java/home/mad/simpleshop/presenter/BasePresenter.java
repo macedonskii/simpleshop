@@ -5,7 +5,6 @@ import android.content.SharedPreferences;
 import javax.inject.Inject;
 
 import home.mad.simpleshop.model.Model;
-import home.mad.simpleshop.model.dto.ModelImpl;
 import home.mad.simpleshop.other.App;
 import rx.subscriptions.CompositeSubscription;
 

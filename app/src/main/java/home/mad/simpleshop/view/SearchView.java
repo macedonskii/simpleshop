@@ -9,7 +9,7 @@ public interface SearchView extends View {
 
     void showEmptyList();
 
-    void showListItems(List<ItemDTO> items);
+    void showListItems(List<ItemDTO> items, String category, String keywords);
 
     void setCategories(List<CategoryDTO> categories);
 }

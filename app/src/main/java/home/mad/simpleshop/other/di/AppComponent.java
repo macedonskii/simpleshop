@@ -3,7 +3,7 @@ package home.mad.simpleshop.other.di;
 import javax.inject.Singleton;
 
 import dagger.Component;
-import home.mad.simpleshop.model.dto.ModelImpl;
+import home.mad.simpleshop.model.ModelImpl;
 import home.mad.simpleshop.presenter.BasePresenter;
 
 /**

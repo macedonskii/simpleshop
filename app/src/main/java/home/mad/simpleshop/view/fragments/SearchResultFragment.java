@@ -2,10 +2,11 @@ package home.mad.simpleshop.view.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.GridView;
 
 import java.util.List;
 
@@ -15,7 +16,7 @@ import home.mad.simpleshop.R;
 import home.mad.simpleshop.model.dto.ItemDTO;
 import home.mad.simpleshop.presenter.Presenter;
 import home.mad.simpleshop.presenter.SearchResultPresenter;
-import home.mad.simpleshop.presenter.adapters.SearchResultAdapter;
+import home.mad.simpleshop.presenter.adapters.SearchVTAdapter;
 import home.mad.simpleshop.view.SearchResultView;
 
 /**
@@ -26,10 +27,13 @@ public class SearchResultFragment extends BaseFragment implements SearchResultVi
 
     private List<ItemDTO> items;
     private SearchResultPresenter presenter;
-    private SearchResultAdapter adapter;
+    private SearchVTAdapter adapter;
 
-    @Bind(R.id.searchGridView)
-    GridView gridView;
+    private String category;
+    private String keywords;
+
+    @Bind(R.id.contentView)
+    RecyclerView contentView;
 
     @Override
     protected Presenter getPresenter() {
@@ -41,7 +45,7 @@ public class SearchResultFragment extends BaseFragment implements SearchResultVi
         super.onCreate(savedInstanceState);
         if (savedInstanceState == null) {
             presenter = new SearchResultPresenter(this);
-            adapter = new SearchResultAdapter(getContext(), items, presenter);
+            adapter = new SearchVTAdapter(getContext(), items, presenter);
         }
     }
 
@@ -50,6 +54,7 @@ public class SearchResultFragment extends BaseFragment implements SearchResultVi
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_search, container, false);
         ButterKnife.bind(this, view);
+
         return view;
 
     }
@@ -57,11 +62,20 @@ public class SearchResultFragment extends BaseFragment implements SearchResultVi
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        gridView.setAdapter(adapter);
+        GridLayoutManager manager = new GridLayoutManager(getContext(), 1);
+        contentView.setLayoutManager(manager);
+
+
+        contentView.setAdapter(adapter);
     }
 
     public static SearchResultFragment getInstance() {
         return new SearchResultFragment();
+    }
+
+    @Override
+    public void onItemClick(ItemDTO item) {
+        activityCallback.showFragment(FullItemFragment.getInstance().setItem(item));
     }
 
     public SearchResultFragment setItems(List<ItemDTO> items) {
@@ -69,8 +83,13 @@ public class SearchResultFragment extends BaseFragment implements SearchResultVi
         return this;
     }
 
-    @Override
-    public void onItemClick(ItemDTO item) {
-        activityCallback.showFragment(FullItemFragment.getInstance().setItem(item));
+    public SearchResultFragment setCategory(String category) {
+        this.category = category;
+        return this;
+    }
+
+    public SearchResultFragment setKeywords(String keywords) {
+        this.keywords = keywords;
+        return this;
     }
 }

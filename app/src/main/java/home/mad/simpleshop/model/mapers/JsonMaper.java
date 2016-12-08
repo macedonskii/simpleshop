@@ -17,8 +17,9 @@ public class JsonMaper implements Func1<JsonObject, List<ItemDTO>> {
     @Override
     public List<ItemDTO> call(JsonObject object) {
         List<ItemDTO> items = new ArrayList<>();
+        String categories = object.get("params").getAsJsonObject().get("category").getAsString();
         for (JsonElement result : object.get("results").getAsJsonArray()) {
-            items.add(new ItemDTO(result));
+            items.add(new ItemDTO(result, categories));
         }
         return items;
     }

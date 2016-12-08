@@ -5,13 +5,11 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
@@ -68,8 +66,8 @@ public class SearchTabFragment extends BaseFragment implements SearchView {
     }
 
     @Override
-    public void showListItems(List<ItemDTO> items) {
-        activityCallback.showFragment(SearchResultFragment.getInstance().setItems(items));
+    public void showListItems(List<ItemDTO> items, String category, String keywords) {
+        activityCallback.showFragment(SearchResultFragment.getInstance().setItems(items).setCategory(category).setKeywords(keywords));
     }
 
     @Override

@@ -21,7 +21,11 @@ public class ItemDTO {
 
     public ItemDTO(){}
 
-    public ItemDTO(JsonObject object) {
+    public ItemDTO(JsonElement result, String categories){
+        this((JsonObject) result,categories);
+    }
+
+    public ItemDTO(JsonObject object, String categories) {
         listingId = object.get("listing_id").getAsLong();
         price = object.get("price").getAsFloat();
         priceDescription = object.get("currency_code").getAsString();
@@ -32,10 +36,7 @@ public class ItemDTO {
         image170135 = images.get("url_170x135").getAsString();
         image570 = images.get("url_570xN").getAsString();
         imageFull = images.get("url_fullxfull").getAsString();
-    }
-
-    public ItemDTO(JsonElement element) {
-        this((JsonObject) element);
+        category = categories;
     }
 
     public String getDescription() {

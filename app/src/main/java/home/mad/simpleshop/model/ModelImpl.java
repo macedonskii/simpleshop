@@ -1,15 +1,16 @@
-package home.mad.simpleshop.model.dto;
+package home.mad.simpleshop.model;
 
 import com.google.gson.JsonObject;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 import javax.inject.Inject;
 
-import home.mad.simpleshop.model.Model;
 import home.mad.simpleshop.model.api.ApiInterface;
+import home.mad.simpleshop.model.dto.ItemDTO;
+import home.mad.simpleshop.model.mapers.JsonMaper;
+import home.mad.simpleshop.model.mapers.ConfirmFavorites;
 import home.mad.simpleshop.model.sqlite.Database;
 import home.mad.simpleshop.other.App;
 import home.mad.simpleshop.other.Const;
@@ -42,14 +43,13 @@ public class ModelImpl implements Model {
         return database.getFavorites(null).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
     }
 
-    //    https://openapi.etsy.com/v2/listings/active?api_key=l6pdqjuf7hdf97h1yvzadfce&category=paper_goods&keywords=terminator&includes=MainImage
     @Override
-    public Observable<JsonObject> getGoods(String category, String itemName) {
+    public Observable<List<ItemDTO>> getGoods(String category, String itemName) {
         HashMap<String, String> values = new HashMap<String, String>();
-        values.put(Const.CATEGORY, (category != null && category.length() != 0) ? category : "paper_goods");
-        values.put(Const.KEYWORDS, (itemName != null && itemName.length() != 0) ? itemName : "terminator");
+        values.put(Const.CATEGORY, category);
+        values.put(Const.KEYWORDS, itemName);
         values.put(Const.INCLUDES, Const.IMAGES);
-        return api.getItems(values).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+        return api.getItems(values).map(new JsonMaper()).zipWith(getFavorites(category),new ConfirmFavorites()).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
     }
 
     @Override

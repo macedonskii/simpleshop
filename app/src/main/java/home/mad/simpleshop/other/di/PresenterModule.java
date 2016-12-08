@@ -5,7 +5,7 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 import home.mad.simpleshop.model.Model;
-import home.mad.simpleshop.model.dto.ModelImpl;
+import home.mad.simpleshop.model.ModelImpl;
 
 /**
  * Created by mad on 05.12.2016.

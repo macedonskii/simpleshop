@@ -5,13 +5,14 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="1dp"
 
     >
 
     <ImageView
         android:id="@+id/image"
         android:layout_width="@dimen/column_width_grid_view"
-        android:layout_height="270dp"
+        android:layout_height="@dimen/image_height"
         android:scaleType="centerCrop"
         android:focusable="false"
         android:clickable="false"
@@ -27,15 +28,20 @@
         >
         <TextView
             android:id="@+id/title"
+            android:layout_marginTop="@dimen/grid_view_single_line_padding_top"
             android:paddingLeft="@dimen/grid_view_single_line_padding_left"
-            android:layout_marginRight="16dp"
+            android:paddingRight="16dp"
             android:layout_centerVertical="true"
             android:textSize="@dimen/grid_view_single_line_text_size"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="It is dog!"
+
             android:focusable="false"
             android:clickable="false"
+            android:maxLines="1"
+            android:maxWidth="250dp"
+
             />
         <CheckBox
             android:id="@+id/button"

@@ -12,4 +12,5 @@
     <dimen name="grid_view_single_line_text_size">16sp</dimen>
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="column_width_grid_view">290dp</dimen>
+    <dimen name="image_height">270dp</dimen>
 </resources>

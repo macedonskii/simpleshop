@@ -44,7 +44,7 @@ public class DatabaseImpl extends SQLiteOpenHelper implements Database {
 
     @Override
     public Observable<List<ItemDTO>> getFavorites(String category) {
-        Cursor cursor = getReadableDatabase().rawQuery("select * from " + TABLE_FAVORITES_NAME + (category != null ? " where " + KEY_CATEGORY + " = " + category + " ;" : " ;"), null);
+        Cursor cursor = getReadableDatabase().rawQuery("SELECT * FROM " + TABLE_FAVORITES_NAME + (category != null ? " WHERE " + KEY_CATEGORY + " = '" + category + "';" : ";"), null);
         ArrayList<ItemDTO> items = new ArrayList<>();
         cursor.moveToFirst();
         while (cursor.moveToNext()) {
@@ -77,7 +77,7 @@ public class DatabaseImpl extends SQLiteOpenHelper implements Database {
     @Override
     public void removeFavorite(long id) {
         try {
-            getWritableDatabase().execSQL(String.format("DELETE FROM %1s WHERE %2s = %3d;", TABLE_FAVORITES_NAME, KEY_LISTING_ID, id));
+            getWritableDatabase().execSQL(String.format("DELETE FROM %1s WHERE %2s = '%3d';", TABLE_FAVORITES_NAME, KEY_LISTING_ID, id));
         } catch (SQLException ex) {
             ex.printStackTrace();
         }

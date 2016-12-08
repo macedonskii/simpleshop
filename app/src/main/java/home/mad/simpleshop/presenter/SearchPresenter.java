@@ -21,6 +21,7 @@ public class SearchPresenter extends BasePresenter {
 
 
     SearchView view;
+    private String category, keywords;
     private List<CategoryDTO> cachedList;
 
     public SearchPresenter(SearchView view) {
@@ -31,8 +32,10 @@ public class SearchPresenter extends BasePresenter {
     }
 
     public void onClickSearch(String category, String keywords){
-        Subscription subscribe = model.getGoods(category, keywords).
-                map(new JsonMaper()).subscribe(new Observer<List<ItemDTO>>() {
+        this.category = category;
+        this.keywords = keywords;
+        Subscription subscribe = model.getGoods(category, keywords)
+                .subscribe(new Observer<List<ItemDTO>>() {
             @Override
             public void onCompleted() {
 
@@ -48,7 +51,7 @@ public class SearchPresenter extends BasePresenter {
                 if (items.size() == 0){
                     view.showEmptyList();
                 }else{
-                    view.showListItems(items);
+                    view.showListItems(items,SearchPresenter.this.category, SearchPresenter.this.keywords);
                 }
             }
         });

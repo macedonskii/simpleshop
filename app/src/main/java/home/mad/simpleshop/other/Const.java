@@ -13,12 +13,18 @@ public class Const {
         public static final String KEY_CATEGORY_LIST = "category_list";
     }
 
+
+
     public static String API_KEY = "api_key";
     public static String API_KEY_VALUE = "l6pdqjuf7hdf97h1yvzadfce";
     public static String CATEGORY = "category";
     public static String KEYWORDS = "keywords";
     public static String INCLUDES = "includes";
     public static String IMAGES = "MainImage";
+    public static String OFFSET = "offset";
+    public static int OFFSET_VALUE = 25;
+
+
 
 
 
