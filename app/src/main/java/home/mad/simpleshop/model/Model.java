@@ -19,7 +19,7 @@ public interface Model {
 
     Observable<JsonObject> getCategories();
 
-    Observable<List<ItemDTO>> getGoods(String category, String itemName);
+    Observable<List<ItemDTO>> getGoods(String category, String itemName, int offset);
 
     void addFavorite(ItemDTO item);
 

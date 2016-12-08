@@ -7,7 +7,6 @@ import java.util.List;
 import home.mad.simpleshop.model.dto.CategoryDTO;
 import home.mad.simpleshop.model.dto.ItemDTO;
 import home.mad.simpleshop.model.mapers.CategoryMaper;
-import home.mad.simpleshop.model.mapers.JsonMaper;
 import home.mad.simpleshop.other.Const;
 import home.mad.simpleshop.view.SearchView;
 import rx.Observer;
@@ -34,7 +33,7 @@ public class SearchPresenter extends BasePresenter {
     public void onClickSearch(String category, String keywords){
         this.category = category;
         this.keywords = keywords;
-        Subscription subscribe = model.getGoods(category, keywords)
+        Subscription subscribe = model.getGoods(category, keywords, 0)
                 .subscribe(new Observer<List<ItemDTO>>() {
             @Override
             public void onCompleted() {

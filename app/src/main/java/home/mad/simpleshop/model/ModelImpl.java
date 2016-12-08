@@ -44,7 +44,7 @@ public class ModelImpl implements Model {
     }
 
     @Override
-    public Observable<List<ItemDTO>> getGoods(String category, String itemName) {
+    public Observable<List<ItemDTO>> getGoods(String category, String itemName, int offset) {
         HashMap<String, String> values = new HashMap<String, String>();
         values.put(Const.CATEGORY, category);
         values.put(Const.KEYWORDS, itemName);

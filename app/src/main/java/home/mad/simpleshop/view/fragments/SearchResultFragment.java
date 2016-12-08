@@ -1,9 +1,12 @@
 package home.mad.simpleshop.view.fragments;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +17,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import home.mad.simpleshop.R;
 import home.mad.simpleshop.model.dto.ItemDTO;
+import home.mad.simpleshop.other.custom.CustomGrigManager;
 import home.mad.simpleshop.presenter.Presenter;
 import home.mad.simpleshop.presenter.SearchResultPresenter;
 import home.mad.simpleshop.presenter.adapters.SearchVTAdapter;
@@ -25,15 +29,15 @@ import home.mad.simpleshop.view.SearchResultView;
 
 public class SearchResultFragment extends BaseFragment implements SearchResultView {
 
-    private List<ItemDTO> items;
-    private SearchResultPresenter presenter;
-    private SearchVTAdapter adapter;
 
-    private String category;
-    private String keywords;
+    private SearchResultPresenter presenter = new SearchResultPresenter();
+    private SearchVTAdapter adapter;
 
     @Bind(R.id.contentView)
     RecyclerView contentView;
+    @Bind(R.id.swipe)
+    SwipeRefreshLayout swipeRefreshLayout;
+
 
     @Override
     protected Presenter getPresenter() {
@@ -44,8 +48,8 @@ public class SearchResultFragment extends BaseFragment implements SearchResultVi
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (savedInstanceState == null) {
-            presenter = new SearchResultPresenter(this);
-            adapter = new SearchVTAdapter(getContext(), items, presenter);
+            presenter.setView(this);
+            adapter = new SearchVTAdapter(getContext(), presenter.getItems(), presenter);
         }
     }
 
@@ -54,7 +58,6 @@ public class SearchResultFragment extends BaseFragment implements SearchResultVi
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_search, container, false);
         ButterKnife.bind(this, view);
-
         return view;
 
     }
@@ -62,11 +65,10 @@ public class SearchResultFragment extends BaseFragment implements SearchResultVi
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        GridLayoutManager manager = new GridLayoutManager(getContext(), 1);
+        GridLayoutManager manager = new GridLayoutManager(getContext(), calculateNoOfColumns(getContext()));
         contentView.setLayoutManager(manager);
-
-
         contentView.setAdapter(adapter);
+        swipeRefreshLayout.setOnRefreshListener(() -> presenter.onSwipeRefresh());
     }
 
     public static SearchResultFragment getInstance() {
@@ -79,17 +81,45 @@ public class SearchResultFragment extends BaseFragment implements SearchResultVi
     }
 
     public SearchResultFragment setItems(List<ItemDTO> items) {
-        this.items = items;
+        presenter.setItems(items);
         return this;
     }
 
     public SearchResultFragment setCategory(String category) {
-        this.category = category;
+        presenter.setCategory(category);
         return this;
     }
 
     public SearchResultFragment setKeywords(String keywords) {
-        this.keywords = keywords;
+        presenter.setKeywords(keywords);
         return this;
     }
+
+    public static int calculateNoOfColumns(Context context) {
+        DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
+        float dpWidth = displayMetrics.widthPixels / displayMetrics.density;
+        int noOfColumns = (int) (dpWidth / context.getResources().getDimension(R.dimen.column_width_grid_view));
+        return Math.max(1, noOfColumns);
+    }
+
+    @Override
+    public void onEmptyList() {
+        // TODO: 08.12.2016 show all!
+    }
+
+    @Override
+    public void onListLoad(List<ItemDTO> itemDTOs) {
+        adapter.setList(itemDTOs);
+    }
+
+    @Override
+    public void onNextPartDownloaded(List<ItemDTO> items) {
+        adapter.addList(items);
+    }
+
+    @Override
+    public void stopRefresh() {
+        swipeRefreshLayout.setRefreshing(false);
+    }
+
 }

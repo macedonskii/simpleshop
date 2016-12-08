@@ -1,5 +1,7 @@
 package home.mad.simpleshop.view;
 
+import java.util.List;
+
 import home.mad.simpleshop.model.dto.ItemDTO;
 
 /**
@@ -8,4 +10,12 @@ import home.mad.simpleshop.model.dto.ItemDTO;
 public interface SearchResultView extends View{
 
     void onItemClick(ItemDTO item);
+
+    void onListLoad(List<ItemDTO> itemDTOs);
+
+    void onEmptyList();
+
+    void stopRefresh();
+
+    void onNextPartDownloaded(List<ItemDTO> items);
 }
