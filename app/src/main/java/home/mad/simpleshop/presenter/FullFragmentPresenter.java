@@ -20,6 +20,7 @@ public class FullFragmentPresenter extends BasePresenter {
     }
 
     public void onButtonCheckClick(boolean b) {
+        item.setFavorites(b);
         if (b){
             model.addFavorite(item);
         }else{

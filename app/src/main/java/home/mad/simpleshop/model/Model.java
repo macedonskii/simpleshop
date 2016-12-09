@@ -25,5 +25,7 @@ public interface Model {
 
     void removeFavorite(long id);
 
-    Observable<Boolean> isItemRemover(long listingId);
+    Observable<Boolean> isItemRemoved(long listingId);
+
+    Observable<Boolean> isItemAdd(long listingId);
 }

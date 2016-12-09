@@ -81,6 +81,12 @@ public class DatabaseImpl extends SQLiteOpenHelper implements Database {
     }
 
     @Override
+    public Observable<Boolean> isItemAdd(long id) {
+        Cursor cursor = getReadableDatabase().rawQuery("SELECT * FROM " + TABLE_FAVORITES_NAME + " WHERE " + KEY_LISTING_ID + " = '" + id + "';",null);
+        return Observable.just(cursor.getCount() != 0);
+    }
+
+    @Override
     public void removeFavorite(long id) {
         try {
             getWritableDatabase().execSQL(String.format("DELETE FROM %1s WHERE %2s = '%3d';", TABLE_FAVORITES_NAME, KEY_LISTING_ID, id));

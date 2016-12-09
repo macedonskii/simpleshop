@@ -18,4 +18,6 @@ public interface Database {
     void removeFavorite(long id);
 
     Observable<Boolean> isItemRemoved(long id);
+
+    Observable<Boolean> isItemAdd(long listingId);
 }

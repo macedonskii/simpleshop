@@ -51,7 +51,7 @@ public class FavoritesPresenter extends BasePresenter implements AbstractAdapter
 
     public void onViewStateRestored(Bundle savedInstanceState) {
         if (tmp != null) {
-            Subscription subscribe = model.isItemRemover(tmp.getListingId()).subscribe(new Observer<Boolean>() {
+            Subscription subscribe = model.isItemRemoved(tmp.getListingId()).subscribe(new Observer<Boolean>() {
                 @Override
                 public void onCompleted() {
 

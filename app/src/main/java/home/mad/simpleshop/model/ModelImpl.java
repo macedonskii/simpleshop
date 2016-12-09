@@ -49,6 +49,7 @@ public class ModelImpl implements Model {
         values.put(Const.CATEGORY, category);
         values.put(Const.KEYWORDS, itemName);
         values.put(Const.INCLUDES, Const.IMAGES);
+        if (offset != 0) values.put(Const.OFFSET, String.valueOf(offset));
         return api.getItems(values).map(new JsonMaper()).zipWith(getFavorites(category),new ConfirmFavorites()).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
     }
 
@@ -68,7 +69,12 @@ public class ModelImpl implements Model {
     }
 
     @Override
-    public Observable<Boolean> isItemRemover(long listingId) {
+    public Observable<Boolean> isItemRemoved(long listingId) {
         return database.isItemRemoved(listingId).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+    }
+
+    @Override
+    public Observable<Boolean> isItemAdd(long listingId) {
+        return database.isItemAdd(listingId).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
     }
 }

@@ -2,6 +2,7 @@ package home.mad.simpleshop.presenter.adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,7 +55,8 @@ public abstract class AbstractAdapter extends RecyclerView.Adapter<AbstractAdapt
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         setValues(holder, items.get(position));
-        if ((position == getItemCount() %2) || (position > (getItemCount()) * 3 / 4))
+        Log.d("Adapter", "onBindViewHolder() called with: position = [" + position + "]");
+        if (position == getItemCount() - 1)
             startLoadNewList();
     }
 
@@ -88,18 +90,19 @@ public abstract class AbstractAdapter extends RecyclerView.Adapter<AbstractAdapt
         notifyDataSetChanged();
     }
 
-    public void removeItem(int position){
+    public void removeItem(int position) {
         items.remove(position);
         notifyItemRemoved(position);
     }
 
-    public void removeItem(ItemDTO item){
+    public void removeItem(ItemDTO item) {
         int i = items.indexOf(item);
         removeItem(i);
     }
 
-    public interface ItemClick{
+    public interface ItemClick {
         void onItemClick(ItemDTO item);
+
         void onFavoritesClick(ItemDTO item, boolean checked);
     }
 
