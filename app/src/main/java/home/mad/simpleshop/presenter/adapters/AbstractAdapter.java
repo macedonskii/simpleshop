@@ -22,18 +22,18 @@ import home.mad.simpleshop.R;
 import home.mad.simpleshop.model.dto.ItemDTO;
 
 /**
- * Created by mad on 08.12.2016.
+ * Created by mad on 09.12.2016.
  */
 
-public class SearchVTAdapter extends RecyclerView.Adapter<SearchVTAdapter.ViewHolder> {
-    private Context context;
-    private List<ItemDTO> items;
-    private LayoutInflater inflater;
-    private SearchResultAdapter.ItemClick itemClick;
-    private Map<Integer, ItemDTO> buttonsAssoc = new HashMap<>();
-    private Map<Integer, ItemDTO> backgroundAssoc = new HashMap<>();
+public abstract class AbstractAdapter extends RecyclerView.Adapter<AbstractAdapter.ViewHolder> {
+    protected Context context;
+    protected List<ItemDTO> items;
+    protected LayoutInflater inflater;
+    protected ItemClick itemClick;
+    protected Map<Integer, ItemDTO> buttonsAssoc = new HashMap<>();
+    protected Map<Integer, ItemDTO> backgroundAssoc = new HashMap<>();
 
-    public SearchVTAdapter(Context context, List<ItemDTO> items, SearchResultAdapter.ItemClick itemClick) {
+    public AbstractAdapter(Context context, List<ItemDTO> items, ItemClick itemClick) {
         this.context = context;
         this.itemClick = itemClick;
         this.items = items;
@@ -50,9 +50,12 @@ public class SearchVTAdapter extends RecyclerView.Adapter<SearchVTAdapter.ViewHo
         return new ViewHolder(inflater.inflate(R.layout.grid_view_item, parent, false));
     }
 
+
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         setValues(holder, items.get(position));
+        if ((position == getItemCount() %2) || (position > (getItemCount()) * 3 / 4))
+            startLoadNewList();
     }
 
     private void setValues(ViewHolder holder, ItemDTO item) {
@@ -61,11 +64,19 @@ public class SearchVTAdapter extends RecyclerView.Adapter<SearchVTAdapter.ViewHo
         holder.title.setText(item.getTitle());
         Picasso.with(context).load(item.getImageMedium()).into(holder.image);
         holder.checkBox.setChecked(item.isFavorites());
-        holder.checkBox.setOnClickListener(view -> itemClick.onFavoritesClick(buttonsAssoc.get(view.hashCode()), ((CheckBox) view).isChecked()));
+        holder.checkBox.setOnClickListener(view -> onFavoritesClick(buttonsAssoc.get(view.hashCode()), ((CheckBox) view).isChecked()));
         holder.background.setOnClickListener((View v) -> {
-            itemClick.onItemClick(backgroundAssoc.get(v.hashCode()));
+            onItemClick(backgroundAssoc.get(v.hashCode()));
         });
+
+
     }
+
+    public abstract void onFavoritesClick(ItemDTO item, boolean isChecked);
+
+    public abstract void onItemClick(ItemDTO item);
+
+    public abstract void startLoadNewList();
 
     public void setList(List<ItemDTO> items) {
         this.items = items;
@@ -75,6 +86,21 @@ public class SearchVTAdapter extends RecyclerView.Adapter<SearchVTAdapter.ViewHo
     public void addList(List<ItemDTO> items) {
         this.items.addAll(items);
         notifyDataSetChanged();
+    }
+
+    public void removeItem(int position){
+        items.remove(position);
+        notifyItemRemoved(position);
+    }
+
+    public void removeItem(ItemDTO item){
+        int i = items.indexOf(item);
+        removeItem(i);
+    }
+
+    public interface ItemClick{
+        void onItemClick(ItemDTO item);
+        void onFavoritesClick(ItemDTO item, boolean checked);
     }
 
     protected class ViewHolder extends RecyclerView.ViewHolder {
@@ -87,7 +113,6 @@ public class SearchVTAdapter extends RecyclerView.Adapter<SearchVTAdapter.ViewHo
         ImageView image;
         @Bind(R.id.background)
         RelativeLayout background;
-
 
 
         public ViewHolder(View view) {

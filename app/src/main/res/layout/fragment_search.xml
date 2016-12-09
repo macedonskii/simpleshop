@@ -33,7 +33,9 @@
             android:id="@+id/contentView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_gravity="top|center" />
+            android:layout_gravity="top|center"
+
+            />
 
     </android.support.v4.widget.SwipeRefreshLayout>
 

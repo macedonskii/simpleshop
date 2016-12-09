@@ -16,4 +16,6 @@ public interface Database {
     void addFavorite(ItemDTO item);
 
     void removeFavorite(long id);
+
+    Observable<Boolean> isItemRemoved(long id);
 }

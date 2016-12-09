@@ -66,4 +66,9 @@ public class ModelImpl implements Model {
     public void removeFavorite(long id) {
         database.removeFavorite(id);
     }
+
+    @Override
+    public Observable<Boolean> isItemRemover(long listingId) {
+        return database.isItemRemoved(listingId).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+    }
 }

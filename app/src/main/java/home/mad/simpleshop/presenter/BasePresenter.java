@@ -30,4 +30,6 @@ public abstract class BasePresenter implements Presenter {
     public void onStop() {
         compositeSubscription.clear();
     }
+
+
 }

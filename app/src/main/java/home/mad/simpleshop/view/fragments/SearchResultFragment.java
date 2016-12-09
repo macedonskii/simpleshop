@@ -1,12 +1,10 @@
 package home.mad.simpleshop.view.fragments;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,10 +15,10 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import home.mad.simpleshop.R;
 import home.mad.simpleshop.model.dto.ItemDTO;
-import home.mad.simpleshop.other.custom.CustomGrigManager;
+import home.mad.simpleshop.other.custom.ViewHelper;
 import home.mad.simpleshop.presenter.Presenter;
 import home.mad.simpleshop.presenter.SearchResultPresenter;
-import home.mad.simpleshop.presenter.adapters.SearchVTAdapter;
+import home.mad.simpleshop.presenter.adapters.SearchResultAdapter;
 import home.mad.simpleshop.view.SearchResultView;
 
 /**
@@ -31,7 +29,7 @@ public class SearchResultFragment extends BaseFragment implements SearchResultVi
 
 
     private SearchResultPresenter presenter = new SearchResultPresenter();
-    private SearchVTAdapter adapter;
+    private SearchResultAdapter adapter;
 
     @Bind(R.id.contentView)
     RecyclerView contentView;
@@ -49,7 +47,7 @@ public class SearchResultFragment extends BaseFragment implements SearchResultVi
         super.onCreate(savedInstanceState);
         if (savedInstanceState == null) {
             presenter.setView(this);
-            adapter = new SearchVTAdapter(getContext(), presenter.getItems(), presenter);
+            adapter = new SearchResultAdapter(getContext(), presenter.getItems(), presenter, presenter);
         }
     }
 
@@ -65,7 +63,7 @@ public class SearchResultFragment extends BaseFragment implements SearchResultVi
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        GridLayoutManager manager = new GridLayoutManager(getContext(), calculateNoOfColumns(getContext()));
+        GridLayoutManager manager = new GridLayoutManager(getContext(), ViewHelper.calculateNoOfColumns(getContext()));
         contentView.setLayoutManager(manager);
         contentView.setAdapter(adapter);
         swipeRefreshLayout.setOnRefreshListener(() -> presenter.onSwipeRefresh());
@@ -93,13 +91,6 @@ public class SearchResultFragment extends BaseFragment implements SearchResultVi
     public SearchResultFragment setKeywords(String keywords) {
         presenter.setKeywords(keywords);
         return this;
-    }
-
-    public static int calculateNoOfColumns(Context context) {
-        DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
-        float dpWidth = displayMetrics.widthPixels / displayMetrics.density;
-        int noOfColumns = (int) (dpWidth / context.getResources().getDimension(R.dimen.column_width_grid_view));
-        return Math.max(1, noOfColumns);
     }
 
     @Override

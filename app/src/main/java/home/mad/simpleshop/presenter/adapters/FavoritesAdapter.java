@@ -1,81 +1,33 @@
 package home.mad.simpleshop.presenter.adapters;
 
 import android.content.Context;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.CheckBox;
-import android.widget.ImageButton;
-import android.widget.ImageView;
 
 import java.util.List;
 
-import butterknife.Bind;
-import butterknife.ButterKnife;
-import home.mad.simpleshop.R;
 import home.mad.simpleshop.model.dto.ItemDTO;
 
 /**
- * Created by mad on 02.12.2016.
+ * Created by mad on 09.12.2016.
  */
 
-public class FavoritesAdapter extends BaseAdapter {
+public class FavoritesAdapter extends AbstractAdapter {
 
-    List<ItemDTO> items;
-    LayoutInflater layoutInflater;
-    Context context;
-
-    public FavoritesAdapter(List<ItemDTO> items, Context context) {
-        this.items = items;
-        layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        this.context = context;
+    public FavoritesAdapter(Context context, List<ItemDTO> items, ItemClick itemClick) {
+        super(context, items, itemClick);
     }
 
     @Override
-    public int getCount() {
-        return items.size();
+    public void onFavoritesClick(ItemDTO item, boolean isChecked) {
+        removeItem(item);
     }
 
     @Override
-    public Object getItem(int i) {
-        return items.get(i);
+    public void onItemClick(ItemDTO item) {
+        itemClick.onItemClick(item);
     }
 
     @Override
-    public long getItemId(int i) {
-        return i;
-    }
+    public void startLoadNewList() {
 
-    @Override
-    public View getView(int i, View view, ViewGroup viewGroup) {
-        ViewHolder holder;
-        if (view == null) {
-            view = layoutInflater.inflate(R.layout.grid_view_item, viewGroup, false);
-            holder = new ViewHolder(view);
-            view.setTag(holder);
-        } else {
-            holder = (ViewHolder) view.getTag();
-        }
-
-        setValues(holder, items.get(i));
-
-        return view;
-    }
-
-    private void setValues(ViewHolder holder, ItemDTO item) {
-//        holder.imageView.setImageResource(R.drawable.sample_0);
-    }
-
-    class ViewHolder {
-        @Bind(R.id.button)
-        CheckBox button;
-
-        @Bind(R.id.image)
-        ImageView imageView;
-
-        public ViewHolder(View view) {
-            ButterKnife.bind(this, view);
-        }
     }
 }

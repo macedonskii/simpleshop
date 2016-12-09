@@ -1,11 +1,10 @@
 package home.mad.simpleshop.presenter;
 
-import android.support.v4.widget.SwipeRefreshLayout;
-
 import java.util.List;
 
 import home.mad.simpleshop.model.dto.ItemDTO;
 import home.mad.simpleshop.other.Const;
+import home.mad.simpleshop.presenter.adapters.AbstractAdapter;
 import home.mad.simpleshop.presenter.adapters.SearchResultAdapter;
 import home.mad.simpleshop.view.SearchResultView;
 import rx.Observer;
@@ -14,7 +13,7 @@ import rx.Subscription;
 /**
  * Created by mad on 05.12.2016.
  */
-public class SearchResultPresenter extends BasePresenter implements SearchResultAdapter.ItemClick {
+public class SearchResultPresenter extends BasePresenter implements AbstractAdapter.ItemClick, SearchResultAdapter.ListLoader {
     private SearchResultView view;
     String keyword, category;
     int offset;
@@ -22,10 +21,6 @@ public class SearchResultPresenter extends BasePresenter implements SearchResult
 
     public SearchResultPresenter() {
         offset = Const.OFFSET_VALUE;
-    }
-
-    public SearchResultPresenter(SearchResultView view) {
-        this.view = view;
     }
 
     @Override
@@ -98,8 +93,6 @@ public class SearchResultPresenter extends BasePresenter implements SearchResult
         compositeSubscription.add(subscribe);
     }
 
-
-
     public void setCategory(String category) {
         this.category = category;
     }
@@ -114,5 +107,10 @@ public class SearchResultPresenter extends BasePresenter implements SearchResult
 
     public List<ItemDTO> getItems() {
         return items;
+    }
+
+    @Override
+    public void startLoading() {
+        downloadNextPart();
     }
 }

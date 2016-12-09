@@ -2,6 +2,8 @@ package home.mad.simpleshop.view.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,43 +12,50 @@ import android.widget.GridView;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
 import home.mad.simpleshop.R;
 import home.mad.simpleshop.model.dto.ItemDTO;
+import home.mad.simpleshop.other.custom.ViewHelper;
 import home.mad.simpleshop.presenter.FavoritesPresenter;
 import home.mad.simpleshop.presenter.Presenter;
-import home.mad.simpleshop.presenter.adapters.SearchResultAdapter;
+import home.mad.simpleshop.presenter.adapters.FavoritesAdapter;
 import home.mad.simpleshop.view.FavoritesView;
 
-/**
- * Created by mad on 01.12.2016.
- */
 
 public class FavoritesTabFragment extends BaseFragment implements FavoritesView {
 
 
-    GridView gridView;
+    @Bind(R.id.contentView)
+    RecyclerView contentView;
     private FavoritesPresenter presenter;
-    SearchResultAdapter adapter;
+    FavoritesAdapter adapter;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        presenter = new FavoritesPresenter(this);
+        presenter.loadItems();
+    }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_tab_favorites, container, false);
-        gridView = (GridView) view.findViewById(R.id.grid);
-        if (presenter == null) {
-            presenter = new FavoritesPresenter(this);
-        } else {
-            presenter.setView(this);
-        }
-        if (adapter == null) adapter = new SearchResultAdapter(getContext(), new ArrayList<>(), presenter);
-        gridView.setAdapter(adapter);
+        ButterKnife.bind(this, view);
+        if (adapter == null)
+            adapter = new FavoritesAdapter(getContext(), new ArrayList<>(), presenter);
+        contentView.setLayoutManager(new GridLayoutManager(getContext(), ViewHelper.calculateNoOfColumns(getContext())));
+        contentView.setAdapter(adapter);
+
+
         return view;
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        presenter.onViewCreated();
+
     }
 
     @Override
@@ -67,5 +76,22 @@ public class FavoritesTabFragment extends BaseFragment implements FavoritesView 
     @Override
     public void showFavoritesList(List<ItemDTO> items) {
         adapter.setList(items);
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        presenter.onSaveInstanceState(outState);
+    }
+
+    @Override
+    public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
+        super.onViewStateRestored(savedInstanceState);
+        presenter.onViewStateRestored(savedInstanceState);
+    }
+
+    @Override
+    public void removeItem(ItemDTO tmp) {
+        adapter.removeItem(tmp);
     }
 }
