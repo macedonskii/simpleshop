@@ -88,9 +88,12 @@ public class SearchVTAdapter extends RecyclerView.Adapter<SearchVTAdapter.ViewHo
         @Bind(R.id.background)
         RelativeLayout background;
 
+
+
         public ViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
+
         }
     }
 }

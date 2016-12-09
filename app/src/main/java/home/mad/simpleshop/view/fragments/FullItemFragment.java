@@ -14,6 +14,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import home.mad.simpleshop.R;
 import home.mad.simpleshop.model.dto.ItemDTO;
+import home.mad.simpleshop.other.custom.CheckableFloatingActionButton;
 import home.mad.simpleshop.presenter.FullFragmentPresenter;
 import home.mad.simpleshop.presenter.Presenter;
 import home.mad.simpleshop.view.FullItemView;
@@ -23,8 +24,8 @@ import home.mad.simpleshop.view.FullItemView;
  */
 
 public class FullItemFragment extends BaseFragment implements FullItemView {
-    private ItemDTO item;
-    private FullFragmentPresenter presenter;
+
+    private FullFragmentPresenter presenter = new FullFragmentPresenter();
     @Bind(R.id.backdrop)
     ImageView image;
     @Bind(R.id.description)
@@ -33,28 +34,28 @@ public class FullItemFragment extends BaseFragment implements FullItemView {
     TextView title;
     @Bind(R.id.price)
     TextView price;
+    @Bind(R.id.button)
+    CheckableFloatingActionButton button;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_full_item, container, false);
-        ButterKnife.bind(this,view);
-        if (presenter == null){
-            presenter = new FullFragmentPresenter(this);
-        }else{
-            presenter.setView(this);
-        }
+        ButterKnife.bind(this, view);
+        presenter.setView(this);
         return view;
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        if (item == null) throw new RuntimeException("Item to show == null");
-        Picasso.with(getContext()).load(item.getImageBig()).into(image);
-        description.setText(item.getDescription());
-        title.setText(item.getTitle());
-        price.setText(item.getPriceString());
+        if (presenter.getItem() == null) throw new RuntimeException("Item to show == null");
+        Picasso.with(getContext()).load(presenter.getItem().getImageBig()).into(image);
+        description.setText(presenter.getItem().getDescription());
+        title.setText(presenter.getItem().getTitle());
+        price.setText(presenter.getItem().getPriceString());
+        button.setChecked(presenter.getItem().isFavorites());
+        button.setOnCheckListener((CheckableFloatingActionButton button, boolean b) -> presenter.onButtonCheckClick(b));
     }
 
     @Override
@@ -67,7 +68,7 @@ public class FullItemFragment extends BaseFragment implements FullItemView {
     }
 
     public FullItemFragment setItem(ItemDTO item) {
-        this.item = item;
+        presenter.setItem(item);
         return this;
     }
 }
