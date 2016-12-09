@@ -3,6 +3,8 @@ package home.mad.simpleshop.model.dto;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
+import static android.R.attr.format;
+
 /**
  * Created by mad on 02.12.2016.
  */
@@ -29,8 +31,8 @@ public class ItemDTO {
         listingId = object.get("listing_id").getAsLong();
         price = object.get("price").getAsFloat();
         priceDescription = object.get("currency_code").getAsString();
-        title = object.get("title").getAsString();
-        description = object.get("description").getAsString();
+        setTitle(object.get("title").getAsString());
+        setDescription(object.get("description").getAsString());
         JsonObject images = object.get("MainImage").getAsJsonObject();
 
         image170135 = images.get("url_170x135").getAsString();
@@ -69,12 +71,11 @@ public class ItemDTO {
     }
 
     public String getPriceString() {
-        // TODO: 05.12.2016 test this
-        return String.format("%1$.2f %2s", price, priceDescription);
+        String format = String.format("%1$.2f %2$S", price, priceDescription);
+        return format;
     }
 
     public String getTitleString() {
-        // TODO: 05.12.2016 change this
         return title;
     }
 
@@ -87,7 +88,6 @@ public class ItemDTO {
     }
 
     public String getCategory() {
-        // TODO: 06.12.2016 create category
         return category;
     }
 
@@ -96,7 +96,7 @@ public class ItemDTO {
     }
 
     public void setDescription(String description) {
-        this.description = description;
+        this.description = replace(description);
     }
 
     public void setFavorites(boolean favorites) {
@@ -128,6 +128,10 @@ public class ItemDTO {
     }
 
     public void setTitle(String title) {
-        this.title = title;
+        this.title = replace(title);
+    }
+
+    private static String replace(String str){
+        return str.replace("&#39;","'");
     }
 }
