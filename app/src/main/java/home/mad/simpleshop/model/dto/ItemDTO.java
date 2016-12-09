@@ -132,6 +132,6 @@ public class ItemDTO {
     }
 
     private static String replace(String str){
-        return str.replace("&#39;","'");
+        return str.replace("&#39;","'").replace("&quot;","\\'");
     }
 }
