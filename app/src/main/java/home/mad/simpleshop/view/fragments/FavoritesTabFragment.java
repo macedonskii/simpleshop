@@ -47,8 +47,6 @@ public class FavoritesTabFragment extends BaseFragment implements FavoritesView 
             adapter = new FavoritesAdapter(getContext(), new ArrayList<>(), presenter);
         contentView.setLayoutManager(new GridLayoutManager(getContext(), ViewHelper.calculateNoOfColumns(getContext())));
         contentView.setAdapter(adapter);
-
-
         return view;
     }
 

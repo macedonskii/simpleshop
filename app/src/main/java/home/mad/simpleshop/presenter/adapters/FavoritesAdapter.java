@@ -19,6 +19,7 @@ public class FavoritesAdapter extends AbstractAdapter {
     @Override
     public void onFavoritesClick(ItemDTO item, boolean isChecked) {
         removeItem(item);
+        itemClick.onFavoritesClick(item, isChecked);
     }
 
     @Override
