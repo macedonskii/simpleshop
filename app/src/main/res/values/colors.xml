@@ -15,7 +15,7 @@
     <color name="secondary_text">#757575</color>
     <color name="icons">#FFFFFF</color>
     <color name="colorWhite">#FFFFFF</color>
-    <color name="divider">#2ebdbdbd</color>
+    <color name="divider">#F5F5F5</color>
     <color name="invisible">#00BDBDBD</color>
     <color name="gridViewItemBackground">#FFFFFF</color>
 </resources>

@@ -6,9 +6,6 @@ import android.util.DisplayMetrics;
 
 import home.mad.simpleshop.R;
 
-/**
- * Created by mad on 08.12.2016.
- */
 
 public class ViewHelper {
 
