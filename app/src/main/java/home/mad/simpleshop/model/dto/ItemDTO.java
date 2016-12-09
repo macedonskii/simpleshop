@@ -88,7 +88,7 @@ public class ItemDTO {
 
     public String getCategory() {
         // TODO: 06.12.2016 create category
-        return category != null ? category : "category";
+        return category;
     }
 
     public void setCategory(String category) {

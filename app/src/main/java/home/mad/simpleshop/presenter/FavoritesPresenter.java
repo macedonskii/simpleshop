@@ -40,40 +40,6 @@ public class FavoritesPresenter extends BasePresenter implements AbstractAdapter
         this.view = view;
     }
 
-    public void onViewCreated() {
-
-    }
-
-
-    public void onSaveInstanceState(Bundle outState) {
-
-    }
-
-    public void onViewStateRestored(Bundle savedInstanceState) {
-        if (tmp != null) {
-            Subscription subscribe = model.isItemRemoved(tmp.getListingId()).subscribe(new Observer<Boolean>() {
-                @Override
-                public void onCompleted() {
-
-                }
-
-                @Override
-                public void onError(Throwable e) {
-                    view.showError(e);
-                }
-
-                @Override
-                public void onNext(Boolean result) {
-                    if (!result){
-                        view.removeItem(tmp);
-                    }
-                    tmp = null;
-                }
-            });
-            compositeSubscription.add(subscribe);
-        }
-    }
-
     public void loadItems() {
         Subscription subscribe = model.getFavorites().subscribe(new Observer<List<ItemDTO>>() {
             @Override

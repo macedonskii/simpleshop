@@ -35,7 +35,7 @@ public class FavoritesTabFragment extends BaseFragment implements FavoritesView 
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         presenter = new FavoritesPresenter(this);
-        presenter.loadItems();
+
     }
 
     @Nullable
@@ -45,6 +45,7 @@ public class FavoritesTabFragment extends BaseFragment implements FavoritesView 
         ButterKnife.bind(this, view);
         if (adapter == null)
             adapter = new FavoritesAdapter(getContext(), new ArrayList<>(), presenter);
+        presenter.loadItems();
         contentView.setLayoutManager(new GridLayoutManager(getContext(), ViewHelper.calculateNoOfColumns(getContext())));
         contentView.setAdapter(adapter);
         return view;
@@ -76,17 +77,6 @@ public class FavoritesTabFragment extends BaseFragment implements FavoritesView 
         adapter.setList(items);
     }
 
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        presenter.onSaveInstanceState(outState);
-    }
-
-    @Override
-    public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
-        super.onViewStateRestored(savedInstanceState);
-        presenter.onViewStateRestored(savedInstanceState);
-    }
 
     @Override
     public void removeItem(ItemDTO tmp) {
