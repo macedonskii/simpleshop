@@ -12,4 +12,6 @@ public interface SearchView extends View {
     void showListItems(List<ItemDTO> items, String category, String keywords);
 
     void setCategories(List<CategoryDTO> categories);
+
+    void enterKeywordError();
 }

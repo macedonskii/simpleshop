@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">SimpleShop</string>
+    <string name="keyword_is_empty_error">Item name is empty!</string>
 </resources>

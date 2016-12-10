@@ -74,4 +74,10 @@ public class SearchTabFragment extends BaseFragment implements SearchView {
     public void setCategories(List<CategoryDTO> categories) {
         adapter.setItems(categories);
     }
+
+
+    @Override
+    public void enterKeywordError() {
+        Toast.makeText(getContext(), R.string.keyword_is_empty_error, Toast.LENGTH_LONG).show();
+    }
 }

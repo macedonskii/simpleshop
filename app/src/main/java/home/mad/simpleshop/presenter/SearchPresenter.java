@@ -31,6 +31,10 @@ public class SearchPresenter extends BasePresenter {
     }
 
     public void onClickSearch(String category, String keywords){
+        if (keywords.length() == 0){
+            view.enterKeywordError();
+            return;
+        }
         this.category = category;
         this.keywords = keywords;
         Subscription subscribe = model.getGoods(category, keywords, 0)
