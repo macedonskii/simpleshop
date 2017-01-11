@@ -19,9 +19,6 @@ import home.mad.simpleshop.presenter.FullFragmentPresenter;
 import home.mad.simpleshop.presenter.Presenter;
 import home.mad.simpleshop.view.FullItemView;
 
-/**
- * Created by mad on 07.12.2016.
- */
 
 public class FullItemFragment extends BaseFragment implements FullItemView {
 

@@ -6,9 +6,6 @@ import java.util.List;
 
 import home.mad.simpleshop.model.dto.ItemDTO;
 
-/**
- * Created by mad on 09.12.2016.
- */
 
 public class FavoritesAdapter extends AbstractAdapter {
 

@@ -22,11 +22,8 @@ import home.mad.simpleshop.presenter.SearchPresenter;
 import home.mad.simpleshop.presenter.adapters.CategoriesAdapter;
 import home.mad.simpleshop.view.SearchView;
 
-/**
- * Created by mad on 01.12.2016.
- */
 
-//public class SearchTabFragment extends BaseFragment implements SearchView {
+
 public class SearchTabFragment extends BaseFragment implements SearchView {
     @Bind(R.id.submit)
     Button submit;
@@ -62,7 +59,7 @@ public class SearchTabFragment extends BaseFragment implements SearchView {
 
     @Override
     public void showEmptyList() {
-        Toast.makeText(getContext(), "Item list is empty!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), R.string.error_list_is_empty, Toast.LENGTH_SHORT).show();
     }
 
     @Override

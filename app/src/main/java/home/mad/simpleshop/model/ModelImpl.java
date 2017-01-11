@@ -18,9 +18,7 @@ import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
-/**
- * Created by mad on 04.12.2016.
- */
+
 
 public class ModelImpl implements Model {
     @Inject

@@ -9,9 +9,7 @@ import java.util.List;
 import home.mad.simpleshop.model.dto.ItemDTO;
 import rx.functions.Func1;
 
-/**
- * Created by mad on 05.12.2016.
- */
+
 
 public class JsonMaper implements Func1<JsonObject, List<ItemDTO>> {
     @Override

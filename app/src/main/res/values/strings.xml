@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">SimpleShop</string>
     <string name="keyword_is_empty_error">Item name is empty!</string>
+    <string name="search_fragment_name">search</string>
+    <string name="favorites_fragment_name">favorites</string>
+    <string name="error_list_is_empty">Item list is empty! Try different search terms!</string>
+    <string name="ist_is_empty_tv">List is empty!</string>
 </resources>

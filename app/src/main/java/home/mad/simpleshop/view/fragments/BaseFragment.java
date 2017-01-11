@@ -10,10 +10,6 @@ import home.mad.simpleshop.presenter.Presenter;
 import home.mad.simpleshop.view.ActivityCallback;
 import home.mad.simpleshop.view.View;
 
-/**
- * Created by mad on 01.12.2016.
- */
-
 public abstract class  BaseFragment extends Fragment implements View {
 
     protected String TAG = getClass().getSimpleName();

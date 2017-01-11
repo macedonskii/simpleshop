@@ -8,10 +8,6 @@ import retrofit.http.GET;
 import retrofit.http.QueryMap;
 import rx.Observable;
 
-/**
- * Created by mad on 02.12.2016.
- */
-
 public interface ApiInterface {
 
     @GET("/v2/listings/active")

@@ -5,9 +5,6 @@ import com.google.gson.JsonObject;
 
 import static android.R.attr.format;
 
-/**
- * Created by mad on 02.12.2016.
- */
 public class ItemDTO {
     private long listingId;
     private float price;

@@ -1,8 +1,6 @@
 package home.mad.simpleshop.other;
 
-/**
- * Created by mad on 05.12.2016.
- */
+
 
 public class Const {
     public static final String BASE_URL = "https://openapi.etsy.com";

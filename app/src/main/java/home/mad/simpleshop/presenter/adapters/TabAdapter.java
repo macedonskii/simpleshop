@@ -10,9 +10,6 @@ import java.util.List;
 import home.mad.simpleshop.view.fragments.FavoritesTabFragment;
 import home.mad.simpleshop.view.fragments.SearchTabFragment;
 
-/**
- * Created by mad on 01.12.2016.
- */
 
 public class TabAdapter extends FragmentPagerAdapter {
     final String TAG = getClass().getSimpleName();

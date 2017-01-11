@@ -7,9 +7,7 @@ import java.util.List;
 import home.mad.simpleshop.model.dto.ItemDTO;
 import rx.Observable;
 
-/**
- * Created by mad on 01.12.2016.
- */
+
 
 public interface Model {
 

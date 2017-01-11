@@ -7,7 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.GridView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +28,8 @@ public class FavoritesTabFragment extends BaseFragment implements FavoritesView 
 
     @Bind(R.id.contentView)
     RecyclerView contentView;
+    @Bind(R.id.emptyListTV)
+    TextView emptyList;
     private FavoritesPresenter presenter;
     FavoritesAdapter adapter;
 
@@ -64,7 +66,7 @@ public class FavoritesTabFragment extends BaseFragment implements FavoritesView 
 
     @Override
     public void showEmptyList() {
-
+        emptyList.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -74,12 +76,8 @@ public class FavoritesTabFragment extends BaseFragment implements FavoritesView 
 
     @Override
     public void showFavoritesList(List<ItemDTO> items) {
+        emptyList.setVisibility(View.GONE);
         adapter.setList(items);
     }
 
-
-    @Override
-    public void removeItem(ItemDTO tmp) {
-        adapter.removeItem(tmp);
-    }
 }

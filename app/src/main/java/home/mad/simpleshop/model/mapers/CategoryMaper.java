@@ -9,9 +9,6 @@ import java.util.List;
 import home.mad.simpleshop.model.dto.CategoryDTO;
 import rx.functions.Func1;
 
-/**
- * Created by mad on 08.12.2016.
- */
 
 public class CategoryMaper implements Func1<JsonObject, List<CategoryDTO>> {
 

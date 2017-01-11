@@ -1,7 +1,5 @@
 package home.mad.simpleshop.presenter;
 
-import android.os.Bundle;
-
 import java.util.List;
 
 import home.mad.simpleshop.model.dto.ItemDTO;
@@ -10,9 +8,7 @@ import home.mad.simpleshop.view.FavoritesView;
 import rx.Observer;
 import rx.Subscription;
 
-/**
- * Created by mad on 06.12.2016.
- */
+
 public class FavoritesPresenter extends BasePresenter implements AbstractAdapter.ItemClick {
     private FavoritesView view;
     private ItemDTO tmp;

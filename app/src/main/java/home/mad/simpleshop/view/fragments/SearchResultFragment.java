@@ -21,9 +21,7 @@ import home.mad.simpleshop.presenter.SearchResultPresenter;
 import home.mad.simpleshop.presenter.adapters.SearchResultAdapter;
 import home.mad.simpleshop.view.SearchResultView;
 
-/**
- * Created by mad on 05.12.2016.
- */
+
 
 public class SearchResultFragment extends BaseFragment implements SearchResultView {
 
@@ -78,6 +76,22 @@ public class SearchResultFragment extends BaseFragment implements SearchResultVi
         activityCallback.showFragment(FullItemFragment.getInstance().setItem(item));
     }
 
+    @Override
+    public void onListLoad(List<ItemDTO> itemDTOs) {
+        adapter.setList(itemDTOs);
+    }
+
+
+    @Override
+    public void onNextPartDownloaded(List<ItemDTO> items) {
+        adapter.addList(items);
+    }
+
+    @Override
+    public void stopRefresh() {
+        swipeRefreshLayout.setRefreshing(false);
+    }
+
     public SearchResultFragment setItems(List<ItemDTO> items) {
         presenter.setItems(items);
         return this;
@@ -91,26 +105,6 @@ public class SearchResultFragment extends BaseFragment implements SearchResultVi
     public SearchResultFragment setKeywords(String keywords) {
         presenter.setKeywords(keywords);
         return this;
-    }
-
-    @Override
-    public void onEmptyList() {
-        // TODO: 08.12.2016 show all!
-    }
-
-    @Override
-    public void onListLoad(List<ItemDTO> itemDTOs) {
-        adapter.setList(itemDTOs);
-    }
-
-    @Override
-    public void onNextPartDownloaded(List<ItemDTO> items) {
-        adapter.addList(items);
-    }
-
-    @Override
-    public void stopRefresh() {
-        swipeRefreshLayout.setRefreshing(false);
     }
 
 }

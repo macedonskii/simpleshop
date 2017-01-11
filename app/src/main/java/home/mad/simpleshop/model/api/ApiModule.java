@@ -13,10 +13,6 @@ import retrofit.GsonConverterFactory;
 import retrofit.Retrofit;
 import retrofit.RxJavaCallAdapterFactory;
 
-/**
- * Created by mad on 02.12.2016.
- */
-
 public class ApiModule {
 
     private ApiModule(){}

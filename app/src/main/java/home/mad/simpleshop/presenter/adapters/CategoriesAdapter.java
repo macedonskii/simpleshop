@@ -14,10 +14,6 @@ import butterknife.ButterKnife;
 import home.mad.simpleshop.R;
 import home.mad.simpleshop.model.dto.CategoryDTO;
 
-/**
- * Created by mad on 08.12.2016.
- */
-
 public class CategoriesAdapter extends BaseAdapter {
 
     private Context context;

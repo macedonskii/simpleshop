@@ -5,10 +5,6 @@ import android.content.Context;
 import java.util.List;
 import home.mad.simpleshop.model.dto.ItemDTO;
 
-/**
- * Created by mad on 08.12.2016.
- */
-
 public class SearchResultAdapter extends AbstractAdapter {
     ListLoader loader;
 

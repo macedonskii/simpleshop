@@ -10,9 +10,6 @@ import home.mad.simpleshop.view.SearchResultView;
 import rx.Observer;
 import rx.Subscription;
 
-/**
- * Created by mad on 05.12.2016.
- */
 public class SearchResultPresenter extends BasePresenter implements AbstractAdapter.ItemClick, SearchResultAdapter.ListLoader {
     private SearchResultView view;
     String keyword, category;
@@ -59,10 +56,6 @@ public class SearchResultPresenter extends BasePresenter implements AbstractAdap
             @Override
             public void onNext(List<ItemDTO> itemDTOs) {
                 offset = 25;
-                if (itemDTOs.size() == 0){
-                    view.onEmptyList();
-                    return;
-                }
                 view.stopRefresh();
                 view.onListLoad(itemDTOs);
             }

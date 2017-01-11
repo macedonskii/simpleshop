@@ -12,14 +12,10 @@ import home.mad.simpleshop.view.SearchView;
 import rx.Observer;
 import rx.Subscription;
 
-/**
- * Created by mad on 04.12.2016.
- */
-
 public class SearchPresenter extends BasePresenter {
 
 
-    SearchView view;
+    private SearchView view;
     private String category, keywords;
     private List<CategoryDTO> cachedList;
 

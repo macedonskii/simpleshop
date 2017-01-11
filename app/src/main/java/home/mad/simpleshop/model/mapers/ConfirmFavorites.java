@@ -5,9 +5,7 @@ import java.util.List;
 import home.mad.simpleshop.model.dto.ItemDTO;
 import rx.functions.Func2;
 
-/**
- * Created by mad on 08.12.2016.
- */
+
 
 public class ConfirmFavorites implements Func2<List<ItemDTO>, List<ItemDTO>, List<ItemDTO>> {
     @Override

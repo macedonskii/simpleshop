@@ -22,9 +22,6 @@ import butterknife.ButterKnife;
 import home.mad.simpleshop.R;
 import home.mad.simpleshop.model.dto.ItemDTO;
 
-/**
- * Created by mad on 09.12.2016.
- */
 
 public abstract class AbstractAdapter extends RecyclerView.Adapter<AbstractAdapter.ViewHolder> {
     protected Context context;

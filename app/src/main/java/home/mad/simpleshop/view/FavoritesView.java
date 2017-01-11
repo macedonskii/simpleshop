@@ -4,9 +4,7 @@ import java.util.List;
 
 import home.mad.simpleshop.model.dto.ItemDTO;
 
-/**
- * Created by mad on 01.12.2016.
- */
+
 
 public interface FavoritesView extends View {
     void showEmptyList();
@@ -15,6 +13,4 @@ public interface FavoritesView extends View {
 
     void onItemClick(ItemDTO item);
 
-
-    void removeItem(ItemDTO tmp);
 }
