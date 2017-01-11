@@ -4,6 +4,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import home.mad.simpleshop.view.ActivityCallback;
@@ -11,6 +13,7 @@ import home.mad.simpleshop.view.fragments.TabsFragment;
 
 public class MainActivity extends AppCompatActivity implements ActivityCallback{
 
+    final String TAG = getClass().getSimpleName();
 
     private FragmentManager fragmentManager;
 
@@ -42,6 +45,15 @@ public class MainActivity extends AppCompatActivity implements ActivityCallback{
     public void showError(Throwable throwable) {
         throwable.printStackTrace();
         Toast.makeText(this, throwable.getMessage(), Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home){
+            if (getSupportFragmentManager().getBackStackEntryCount() > 0) onBackPressed();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 }

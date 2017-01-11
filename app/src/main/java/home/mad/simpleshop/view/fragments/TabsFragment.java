@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 
 import java.util.ArrayList;
 
-import home.mad.simpleshop.MainActivity;
 import home.mad.simpleshop.R;
 import home.mad.simpleshop.presenter.Presenter;
 import home.mad.simpleshop.presenter.TabsPresenter;
@@ -38,9 +37,6 @@ public class TabsFragment extends BaseFragment implements TabsView {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_tabs, container, false);
-        Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
-        ((MainActivity)getActivity()).setSupportActionBar(toolbar);
-        ((MainActivity)getActivity()).getSupportActionBar().setHomeButtonEnabled(true);
         viewPager = (ViewPager) view.findViewById(R.id.viewpager);
         setupViewPager();
         tabLayout = (TabLayout) view.findViewById(R.id.tabs);
@@ -57,5 +53,12 @@ public class TabsFragment extends BaseFragment implements TabsView {
         names.add(getString(R.string.favorites_fragment_name));
         TabAdapter adapter = new TabAdapter(getChildFragmentManager(), fragments, names);
         viewPager.setAdapter(adapter);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        showToolbarButton().setHomeAsUpIndicator(R.drawable.ic_menu);
+
     }
 }

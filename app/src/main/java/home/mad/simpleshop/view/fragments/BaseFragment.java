@@ -3,9 +3,11 @@ package home.mad.simpleshop.view.fragments;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.ViewGroup;
+import android.support.v7.app.ActionBar;
+import android.support.v7.widget.Toolbar;
 
+import home.mad.simpleshop.MainActivity;
+import home.mad.simpleshop.R;
 import home.mad.simpleshop.presenter.Presenter;
 import home.mad.simpleshop.view.ActivityCallback;
 import home.mad.simpleshop.view.View;
@@ -29,7 +31,6 @@ public abstract class  BaseFragment extends Fragment implements View {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
-
     }
 
     @Override
@@ -40,6 +41,13 @@ public abstract class  BaseFragment extends Fragment implements View {
         }catch (ClassCastException e){
             throw new ClassCastException(getActivity().getClass().getSimpleName() + " must implement " + ActivityCallback.class.getSimpleName());
         }
+    }
+
+    protected ActionBar showToolbarButton() {
+        Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
+        ((MainActivity)getActivity()).setSupportActionBar(toolbar);
+        ((MainActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        return ((MainActivity)getActivity()).getSupportActionBar();
     }
 
     @Override

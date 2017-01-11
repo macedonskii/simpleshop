@@ -60,6 +60,12 @@ public class FullItemFragment extends BaseFragment implements FullItemView {
         return presenter;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        showToolbarButton();
+    }
+
     public static FullItemFragment getInstance() {
         return new FullItemFragment();
     }

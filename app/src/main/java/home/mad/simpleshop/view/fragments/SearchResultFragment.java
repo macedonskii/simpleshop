@@ -92,6 +92,12 @@ public class SearchResultFragment extends BaseFragment implements SearchResultVi
         swipeRefreshLayout.setRefreshing(false);
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        showToolbarButton();
+    }
+
     public SearchResultFragment setItems(List<ItemDTO> items) {
         presenter.setItems(items);
         return this;

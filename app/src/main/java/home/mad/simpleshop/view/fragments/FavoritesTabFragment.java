@@ -54,12 +54,6 @@ public class FavoritesTabFragment extends BaseFragment implements FavoritesView 
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-    }
-
-    @Override
     protected Presenter getPresenter() {
         return presenter;
     }
