@@ -11,9 +11,6 @@ import android.widget.Checkable;
 
 import home.mad.simpleshop.R;
 
-/**
- * Created by mad on 09.12.2016.
- */
 
 public class CheckableFloatingActionButton extends FloatingActionButton implements Checkable {
 

@@ -80,4 +80,6 @@ public class FavoritesTabFragment extends BaseFragment implements FavoritesView 
         adapter.setList(items);
     }
 
+
+
 }

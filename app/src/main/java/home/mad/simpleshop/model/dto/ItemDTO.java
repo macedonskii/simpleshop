@@ -20,22 +20,22 @@ public class ItemDTO {
 
     public ItemDTO(){}
 
-    public ItemDTO(JsonElement result, String categories){
-        this((JsonObject) result,categories);
+    public ItemDTO(JsonElement result, String category){
+        this((JsonObject) result,category);
     }
 
-    public ItemDTO(JsonObject object, String categories) {
+    public ItemDTO(JsonObject object, String category) {
         listingId = object.get("listing_id").getAsLong();
         price = object.get("price").getAsFloat();
         priceDescription = object.get("currency_code").getAsString();
         setTitle(object.get("title").getAsString());
         setDescription(object.get("description").getAsString());
         JsonObject images = object.get("MainImage").getAsJsonObject();
+        this.category = category;
 
         image170135 = images.get("url_170x135").getAsString();
         image570 = images.get("url_570xN").getAsString();
         imageFull = images.get("url_fullxfull").getAsString();
-        category = categories;
     }
 
     public String getDescription() {
@@ -129,6 +129,6 @@ public class ItemDTO {
     }
 
     private static String replace(String str){
-        return str.replace("&#39;","'").replace("&quot;","\\'");
+        return str.replace("&#39;","\"").replace("&quot;","\"");
     }
 }

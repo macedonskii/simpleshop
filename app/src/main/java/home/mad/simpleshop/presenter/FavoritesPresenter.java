@@ -11,7 +11,6 @@ import rx.Subscription;
 
 public class FavoritesPresenter extends BasePresenter implements AbstractAdapter.ItemClick {
     private FavoritesView view;
-    private ItemDTO tmp;
     private List<ItemDTO> items;
 
     public FavoritesPresenter(FavoritesView view) {
@@ -23,12 +22,15 @@ public class FavoritesPresenter extends BasePresenter implements AbstractAdapter
         item.setFavorites(checked);
         if (!checked) {
             model.removeFavorite(item.getListingId());
+            if (items.size() == 0){
+                view.showEmptyList();
+            }
         }
     }
 
     @Override
     public void onItemClick(ItemDTO item) {
-        tmp = item;
+
         view.onItemClick(item);
     }
 
