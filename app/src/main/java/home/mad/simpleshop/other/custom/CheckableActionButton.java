@@ -30,7 +30,7 @@ public class CheckableActionButton extends FloatingActionButton implements Check
 
     private void setChecked(AttributeSet attrs) {
         TypedArray array = getContext().obtainStyledAttributes(attrs, R.styleable.CheckableActionButton);
-        setChecked(array.getBoolean(R.styleable.CheckableFloatingActionButton_android_checked, false));
+        setChecked(array.getBoolean(R.styleable.CheckableActionButton_android_checked, false));
         array.recycle();
     }
 
