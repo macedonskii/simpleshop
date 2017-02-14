@@ -14,7 +14,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import home.mad.simpleshop.R;
 import home.mad.simpleshop.model.dto.ItemDTO;
-import home.mad.simpleshop.other.custom.CheckableFloatingActionButton;
+import home.mad.simpleshop.other.custom.CheckableActionButton;
 import home.mad.simpleshop.presenter.FullFragmentPresenter;
 import home.mad.simpleshop.presenter.Presenter;
 import home.mad.simpleshop.view.FullItemView;
@@ -32,7 +32,7 @@ public class FullItemFragment extends BaseFragment implements FullItemView {
     @Bind(R.id.price)
     TextView price;
     @Bind(R.id.button)
-    CheckableFloatingActionButton button;
+    CheckableActionButton button;
 
     @Nullable
     @Override
@@ -52,7 +52,7 @@ public class FullItemFragment extends BaseFragment implements FullItemView {
         title.setText(presenter.getItem().getTitle());
         price.setText(presenter.getItem().getPriceString());
         button.setChecked(presenter.getItem().isFavorites());
-        button.setOnCheckListener((CheckableFloatingActionButton button, boolean b) -> presenter.onButtonCheckClick(b));
+        button.setOnCheckListener((CheckableActionButton button, boolean b) -> presenter.onButtonCheckClick(b));
     }
 
     @Override

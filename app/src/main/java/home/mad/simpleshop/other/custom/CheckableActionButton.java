@@ -9,27 +9,27 @@ import android.widget.Checkable;
 import home.mad.simpleshop.R;
 
 
-public class CheckableFloatingActionButton extends FloatingActionButton implements Checkable {
+public class CheckableActionButton extends FloatingActionButton implements Checkable {
 
     private OnCheckedChangeListener listener;
 
     private boolean checked;
 
-    public CheckableFloatingActionButton(Context context) {
+    public CheckableActionButton(Context context) {
         super(context);
     }
 
-    public CheckableFloatingActionButton(Context context, AttributeSet attrs) {
+    public CheckableActionButton(Context context, AttributeSet attrs) {
         super(context, attrs);
         setChecked(attrs);
     }
 
-    public CheckableFloatingActionButton(Context context, AttributeSet attrs, int defStyleAttr) {
+    public CheckableActionButton(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 
     private void setChecked(AttributeSet attrs) {
-        TypedArray array = getContext().obtainStyledAttributes(attrs, R.styleable.CheckableFloatingActionButton);
+        TypedArray array = getContext().obtainStyledAttributes(attrs, R.styleable.CheckableActionButton);
         setChecked(array.getBoolean(R.styleable.CheckableFloatingActionButton_android_checked, false));
         array.recycle();
     }
@@ -68,7 +68,7 @@ public class CheckableFloatingActionButton extends FloatingActionButton implemen
     }
 
     public interface OnCheckedChangeListener{
-        void onChecked(CheckableFloatingActionButton button, boolean isChecked);
+        void onChecked(CheckableActionButton button, boolean isChecked);
     }
 
 
