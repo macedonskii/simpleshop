@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import home.mad.simpleshop.R;
 import home.mad.simpleshop.model.dto.ItemDTO;
@@ -23,15 +23,15 @@ import home.mad.simpleshop.view.FullItemView;
 public class FullItemFragment extends BaseFragment implements FullItemView {
 
     private FullFragmentPresenter presenter = new FullFragmentPresenter();
-    @Bind(R.id.backdrop)
+    @BindView(R.id.backdrop)
     ImageView image;
-    @Bind(R.id.description)
+    @BindView(R.id.description)
     TextView description;
-    @Bind(R.id.title)
+    @BindView(R.id.title)
     TextView title;
-    @Bind(R.id.price)
+    @BindView(R.id.price)
     TextView price;
-    @Bind(R.id.button)
+    @BindView(R.id.button)
     CheckableActionButton button;
 
     @Nullable

@@ -17,7 +17,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import home.mad.simpleshop.R;
 import home.mad.simpleshop.model.dto.ItemDTO;
@@ -105,13 +105,13 @@ public abstract class AbstractAdapter extends RecyclerView.Adapter<AbstractAdapt
 
     protected class ViewHolder extends RecyclerView.ViewHolder {
 
-        @Bind(R.id.button)
+        @BindView(R.id.button)
         CheckBox checkBox;
-        @Bind(R.id.title)
+        @BindView(R.id.title)
         TextView title;
-        @Bind(R.id.image)
+        @BindView(R.id.image)
         ImageView image;
-        @Bind(R.id.background)
+        @BindView(R.id.background)
         RelativeLayout background;
 
 

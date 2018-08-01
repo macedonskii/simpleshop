@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import home.mad.simpleshop.R;
 import home.mad.simpleshop.model.dto.CategoryDTO;
@@ -66,7 +66,7 @@ public class CategoriesAdapter extends BaseAdapter {
     }
 
     protected class ViewHolder{
-        @Bind(R.id.textItem)
+        @BindView(R.id.textItem)
         TextView textView;
 
         public ViewHolder(View view) {

@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import home.mad.simpleshop.R;
 import home.mad.simpleshop.model.dto.ItemDTO;
@@ -29,9 +29,9 @@ public class SearchResultFragment extends BaseFragment implements SearchResultVi
     private SearchResultPresenter presenter = new SearchResultPresenter();
     private SearchResultAdapter adapter;
 
-    @Bind(R.id.contentView)
+    @BindView(R.id.contentView)
     RecyclerView contentView;
-    @Bind(R.id.swipe)
+    @BindView(R.id.swipe)
     SwipeRefreshLayout swipeRefreshLayout;
 
 

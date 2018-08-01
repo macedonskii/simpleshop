@@ -12,7 +12,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import home.mad.simpleshop.R;
 import home.mad.simpleshop.model.dto.ItemDTO;
@@ -26,9 +26,9 @@ import home.mad.simpleshop.view.FavoritesView;
 public class FavoritesTabFragment extends BaseFragment implements FavoritesView {
 
 
-    @Bind(R.id.contentView)
+    @BindView(R.id.contentView)
     RecyclerView contentView;
-    @Bind(R.id.emptyListTV)
+    @BindView(R.id.emptyListTV)
     TextView emptyList;
     private FavoritesPresenter presenter;
     FavoritesAdapter adapter;
